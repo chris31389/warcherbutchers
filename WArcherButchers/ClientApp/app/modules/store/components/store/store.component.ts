@@ -9,6 +9,7 @@ import { CategoryService } from "../../";
 export class StoreComponent {
     searchTerm: string = "";
     categories: Array<string> = [];
+    filteredItems: Array<any>;
 
     constructor(private categoryService: CategoryService) {
         this.categories = categoryService.getOptions();

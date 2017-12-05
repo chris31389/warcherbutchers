@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse" id="collapsible-navbar-lower">
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" 
+                    <input type="text"
                            name="search-term"
-                           [(ngModel)]="searchTerm" 
-                           class="form-control" 
+                           [(ngModel)]="searchTerm"
+                           class="form-control"
                            (change)="updateFilterItems()"
                            placeholder="Search">
                 </div>
@@ -30,20 +30,21 @@
     </div>
 </nav>
 
-<div class="clear-float-optional"></div>
-<div id="main">
-    <div class="show-basket" ng-class="{'fix-basket-btn':scrollPos > 62}">
-        <!--<a href="" class="btn btn-default show-basket-btn" role="button" ng-click="goToId('sidebar')">Go to Basket</a>-->
-        <a href="#sidebar" class="btn btn-default show-basket-btn" role="button" du-smooth-scroll>Go to Basket</a>
+<section id="storewrapper">
+    <div class="clear-float-optional"></div>
+    <div id="main">
+        <div class="show-basket" [ngClass]="{'fix-basket-btn':scrollPos > 62}">
+            <!--<a href="" class="btn btn-default show-basket-btn" role="button" ng-click="goToId('sidebar')">Go to Basket</a>-->
+            <a href="#sidebar" class="btn btn-default show-basket-btn" role="button" du-smooth-scroll>Go to Basket</a>
+        </div>
+        <div class="products">
+            <ul class="product-list">
+                <li *ngFor="let item of filteredItems">
+                    <product (addToBasket)="addToBasket($event)" [item]="item"></product>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="products">
-        <ul class="product-list">
-            <li ng-repeat="item in filteredItems">
-                <article class="product-wrapper text-center" product="item" add-item="basket.addItem"></article>
-            </li>
-        </ul>
-    </div>
-</div>
-<div class="clear-float-optional"></div>
-<div id="sidebar" ng-include="'views/partials/basket.html'">
-</div>
+    <div class="clear-float-optional"></div>
+    <sidebar></sidebar>
+</section>

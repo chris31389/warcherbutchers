@@ -1,0 +1,40 @@
+#splash {
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    max-height:100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff; /* Green #50D569; */
+}
+
+.splash-pad-top {
+    padding-top: 20%;
+}
+
+.splash-arrow{
+    padding-top:20px;
+    padding-bottom:200px;
+}
+
+.radius-border {
+    padding: 10px 15px;
+    color: #fff;
+    border: 2px solid #b4b4b4;
+    border-radius: 50%;
+    font-size: 24px;
+    transition: all 0.5s;
+    background-color: inherit;
+}
+
+.radius-border:hover {
+    background: #fcac45;
+    color: #ffffff;
+    border: 2px solid #fcac45;
+}
+
+@media screen and (max-width: 768px) {
+    .splash-pad-top {
+        padding-top: 160px;
+    }
+}

@@ -1,0 +1,49 @@
+﻿<nav class="navbar navbar-default navbar-lower" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-navbar-lower">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand not-active" href="#">Filter</a>
+        </div>
+        <div class="collapse navbar-collapse" id="collapsible-navbar-lower">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" 
+                           name="search-term"
+                           [(ngModel)]="searchTerm" 
+                           class="form-control" 
+                           (change)="updateFilterItems()"
+                           placeholder="Search">
+                </div>
+                <div class="form-group">
+                    <span *ngFor="let category of categories" class="pad-left-20">
+                        <input type="checkbox" (click)="includeCategory(category)"/>
+                        <span [innerHtml]="category"></span>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="clear-float-optional"></div>
+<div id="main">
+    <div class="show-basket" ng-class="{'fix-basket-btn':scrollPos > 62}">
+        <!--<a href="" class="btn btn-default show-basket-btn" role="button" ng-click="goToId('sidebar')">Go to Basket</a>-->
+        <a href="#sidebar" class="btn btn-default show-basket-btn" role="button" du-smooth-scroll>Go to Basket</a>
+    </div>
+    <div class="products">
+        <ul class="product-list">
+            <li ng-repeat="item in filteredItems">
+                <article class="product-wrapper text-center" product="item" add-item="basket.addItem"></article>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="clear-float-optional"></div>
+<div id="sidebar" ng-include="'views/partials/basket.html'">
+</div>

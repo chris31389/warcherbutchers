@@ -1,0 +1,19 @@
+<section id="splash"
+         class="splash-pad-top"
+         [style.background-image]="getImageStyle()"
+         >
+    <article class="container">
+        <h2 [innerHtml]="adjective"></h2>
+
+        <h1 class="title" [innerHtml]="title"></h1>
+
+        <p class="caption" [innerHtml]="caption"></p>
+        <p class="caption" *ngIf="subCaption" [innerHtml]="subCaption"></p>
+
+        <div class="splash-arrow">
+            <button (click)="goToTarget()" class="btn radius-border padding">
+                <span>Lets see!</span>
+            </button>
+        </div>
+    </article>
+</section>

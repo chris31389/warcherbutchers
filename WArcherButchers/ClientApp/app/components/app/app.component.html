@@ -1,0 +1,14 @@
+<nav-menu></nav-menu>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
+<app-modal #errorModal>
+    <div class="app-modal-header">
+        <h3 *ngIf="error" [innerHtml]="error.title"></h3>
+    </div>
+    <div class="app-modal-body">
+        <span *ngIf="error" [innerHtml]="error.message"></span>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="modalHide()">Close</button>
+    </div>
+</app-modal>

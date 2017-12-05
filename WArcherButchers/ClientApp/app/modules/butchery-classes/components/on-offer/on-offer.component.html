@@ -1,0 +1,40 @@
+﻿<h2 class="section-title">Master Classes On Offer</h2>
+
+<div class="line"></div>
+<div *ngIf="classes.length > 0">
+    <div class="row equal pad-bot-xs-20" *ngFor="let classElement of classes">
+        <div class="col-sm-6 text-center">
+            <h2 [innerHtml]="classElement.name"></h2>
+
+            <p>
+                <span [innerHtml]="classElement.startDateFormatted"></span>
+            </p>
+            <p>
+                <span>Time-period: </span>
+                <span [innerHtml]="classElement.length.value"></span>
+                <span [innerHtml]="classElement.length.unit"></span>
+            </p>
+            <p>
+                <span>Cost: </span><span class="price-highlight" price="classElement.price"></span>
+            </p>
+            <p [innerHtml]="classElement.caption"></p>
+            <!--
+            <a [attr.href]="#/Master-Classes/{{ classElement._id }}" class="btn btn-info">More Info</a>
+            -->
+            <button type="button" class="btn btn-primary">Book Now</button>
+        </div>
+        <div class="col-sm-6 pad-bot-xs-20">
+            <img [src]="classElement.imageUrl" class="image-display"/>
+        </div>
+    </div>
+</div>
+<div *ngIf="classes.length === 0" class="row equal pad-bot-xs-20">
+    <div class="col-sm-6 text-center">
+        <h2 [innerHtml]="noClassElement.name"></h2>
+
+        <p [innerHtml]="noClassElement.caption"></p>
+    </div>
+    <div class="col-sm-6 pad-bot-xs-20">
+        <img [src]="'dist/assets/sausage-class.jpg'" class="image-display"/>
+    </div>
+</div>

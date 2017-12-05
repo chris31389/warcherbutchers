@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<app>Loading...</app>
+
+<script>
+    var approvals = {
+        url: "@ViewData["Approvals.Url"]"
+    };
+
+    var auth0Configuration = {
+        clientId: "@ViewData["Auth0.ClientId"]",
+        domain: "@ViewData["Auth0.Domain"]",
+        callbackUrl: "@ViewData["Auth0.CallbackUrl"]",
+        apiUrl: "@ViewData["Auth0.ApiUrl"]",
+        silentUrl: "@ViewData["Auth0.SilentUrl"]"
+    };
+</script>
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+<script src="~/dist/main-client.js" asp-append-version="true"></script>

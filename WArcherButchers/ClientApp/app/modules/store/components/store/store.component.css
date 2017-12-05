@@ -1,0 +1,30 @@
+﻿#main {
+    float:left;
+    background-color: rgb(247, 245, 242);
+    overflow: auto;
+    height: 100%;
+    border: 5px solid #FFFFFF;
+    width: calc(100% - 300px);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+#storewrapper{
+    padding:5px;
+}
+
+@media screen and (max-width: 767px) {
+    #main{
+        width: 100%;
+    }
+
+    .clear-float-optional{
+        clear: both;
+    }
+
+    #storewrapper{
+        width: 100%;
+    }
+}

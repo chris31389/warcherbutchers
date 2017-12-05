@@ -1,0 +1,53 @@
+.navbar-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.navbar-static-top { z-index: 1001; }
+
+.navbar-default { background-color: #f1f1f1; }
+
+.navbar-default .navbar-brand {
+    font-size: 16px;
+    color: #8e8e8e;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #8e8e8e;
+    outline: 0;
+}
+
+.navbar-default .navbar-nav > .link-active > a,
+.navbar-default .navbar-nav > .link-active > a:hover,
+.navbar-default .navbar-nav > .link-active > a:focus {
+    color: #666;
+    background-color: #fff;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus { color: black; }
+
+.navbar .container-fluid { margin-top: 0px; }
+
+.navbar .user-info {
+    margin-left: 40px;
+    margin-right: 0;
+    margin-top: 14.5px;
+}
+
+.nav-btn {
+    width: 64px;
+    height: 64px;
+    box-shadow: none;
+    border: 0;
+    border-radius: 0;
+    background-color: inherit;
+}
+
+#settingsButton { font-size: 1.7em; }
+
+.nav-btn:hover { background-color: lightgray; }
+
+@media (max-width: 767px) {
+    li .glyphicon { margin-right: 10px; }
+}

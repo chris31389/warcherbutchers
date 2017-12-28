@@ -1,4 +1,5 @@
 ﻿import { Component } from "@angular/core";
+import { Basket } from "../../";
 
 @Component({
     selector: "sidebar",
@@ -6,7 +7,11 @@
     styleUrls: [ "./sidebar.component.css" ]
 })
 export class SidebarComponent {
+    basket: Basket;
 
+    constructor() {
+        
+    }
 }
 
 /*

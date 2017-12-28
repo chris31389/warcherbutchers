@@ -2,9 +2,10 @@
     <h4 class="text-center">My Basket</h4>
 </div>
 <div class="paper">
-    <div ng-show="basket.items.list.length === 0" class="text-center">
+    <div *ngIf="basket.totalItems === 0" class="text-center">
         <p class="vertical-align-middle">Select an item from the store to add it to the basket</p>
     </div>
+    <!--
     <div ng-repeat="item in basket.items.list" class="basket-item">
         <div class="basket-item-name clear-float">
             <div class="paper-inline">
@@ -24,14 +25,14 @@
             </a>
             <span class="float-right" price="item.total"></span>
         </div>
-    </div>
+    </div>-->
 </div>
 <div class="basket-total price-highlight clear-float">
     <p class="lead">
         <span class="float-left">Sub-Total Cost: </span>
-        <span class="float-right" price="basket.items.subtotal"></span>
+        <span class="float-right" price="basket.subTotalCost"></span>
     </p>
-</div>
+</div><!--
 <div class="paper">
     <div class="basket-item">
         <div class="basket-item-name clear-float">
@@ -49,15 +50,15 @@
             <span class="float-right" price="basket.items.deliveryPriceApplied"></span>
         </div>
     </div>
-</div>
+</div>-->
 <div class="basket-total price-highlight clear-float">
     <p class="lead">
         <span class="float-left">Total Cost: </span>
-        <span class="float-right" price="basket.items.total"></span>
+        <span class="float-right" price="basket.totalCost"></span>
     </p>
 </div>
-<div ng-show="basket.items.list.length > 0" class="button-bank text-center">
-    <button class="btn btn-default" type="button" ng-click="basket.removeAllItems()">
+<div *ngIf="basket.totalItems > 0" class="button-bank text-center">
+    <button class="btn btn-default" type="button" (click)="basket.removeAllItems()">
         Clear
     </button>
     <a class="btn btn-default checkout-link" type="button" href="#/checkout">

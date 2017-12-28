@@ -37,14 +37,14 @@
             <!--<a href="" class="btn btn-default show-basket-btn" role="button" ng-click="goToId('sidebar')">Go to Basket</a>-->
             <a href="#sidebar" class="btn btn-default show-basket-btn" role="button" du-smooth-scroll>Go to Basket</a>
         </div>
-        <div class="products">
+        <div class="products" *ngIf="filteredProducts">
             <ul class="product-list">
-                <li *ngFor="let item of filteredItems">
-                    <product (addToBasket)="addToBasket($event)" [item]="item"></product>
+                <li *ngFor="let product of filteredProducts">
+                    <product (addToBasket)="addToBasket($event)" [product]="product"></product>
                 </li>
             </ul>
         </div>
     </div>
     <div class="clear-float-optional"></div>
-    <sidebar></sidebar>
+    <sidebar id="sidebar"></sidebar>
 </section>

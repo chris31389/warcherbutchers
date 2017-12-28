@@ -31,6 +31,6 @@ import {
         RouterModule,
         ProductComponent
     ]
-} as any)
+})
 export class StoreModule {
 }

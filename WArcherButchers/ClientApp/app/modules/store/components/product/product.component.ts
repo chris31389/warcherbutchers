@@ -1,4 +1,5 @@
 ﻿import { Component, Input, Output, EventEmitter } from "@angular/core";
+import {Product} from "../../";
 
 @Component({
     selector: "product",
@@ -7,10 +8,10 @@
 })
 export class ProductComponent {
     @Input()
-    item: any;
+    product: Product;
 
     @Output()
     addToBasket = new EventEmitter<any>();
 
-    add = this.addToBasket.emit(this.item);
+    add = this.addToBasket.emit(this.product);
 }

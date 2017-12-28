@@ -32,25 +32,21 @@
         <span class="float-left">Sub-Total Cost: </span>
         <span class="float-right" price="basket.subTotalCost"></span>
     </p>
-</div><!--
+</div>
 <div class="paper">
     <div class="basket-item">
         <div class="basket-item-name clear-float">
-            <div class="paper-inline">
-                <span class="basket-item-quantity pad-left-20" ng-bind="basket.items.deliveryDetails.quantity"></span>
-            </div>
-            <div ng-bind="basket.items.deliveryDetails.name"></div>
-            <div ng-bind="basket.items.deliveryDetails.deliveryDate"></div>
+            <div>3-5 working days delivery</div>
             <div class="text-warning">
                 <span>*Free if order is over </span>
-                <span price="basket.items.deliveryDetails.limit"></span>
+                <span price="deliveryLimit"></span>
             </div>
         </div>
         <div class="basket-item-total clear-float">
             <span class="float-right" price="basket.items.deliveryPriceApplied"></span>
         </div>
     </div>
-</div>-->
+</div>
 <div class="basket-total price-highlight clear-float">
     <p class="lead">
         <span class="float-left">Total Cost: </span>

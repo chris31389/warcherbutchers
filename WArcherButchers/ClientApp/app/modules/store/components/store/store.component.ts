@@ -1,4 +1,4 @@
-﻿import { Product } from "../../";
+﻿import { Product, Basket } from "../../";
 import { Component } from "@angular/core";
 import { CategoryService } from "../../";
 
@@ -8,7 +8,7 @@ import { CategoryService } from "../../";
     styleUrls: ["./store.component.css"]
 })
 export class StoreComponent {
-    basket
+    basket: Basket;
     searchTerm: string = "";
     categories: Array<string> = [];
     filteredProducts: Array<Product>;
@@ -24,6 +24,7 @@ export class StoreComponent {
 
         this.filteredProducts = new Array<Product>();
         this.products.forEach(product => this.filteredProducts.push(product));
+        this.basket = new Basket();
     }
 
     updateFilterItems = () => {}

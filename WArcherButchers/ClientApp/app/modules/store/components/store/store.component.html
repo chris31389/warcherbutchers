@@ -46,5 +46,5 @@
         </div>
     </div>
     <div class="clear-float-optional"></div>
-    <sidebar id="sidebar"></sidebar>
+    <sidebar *ngIf="basket" id="sidebar" [basket]="basket"></sidebar>
 </section>

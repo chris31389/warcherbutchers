@@ -1,0 +1,7 @@
+﻿<span *ngIf="value" [ngClass]="{'price-highlight': highlight}"><!--
+    --><span class="price-currency">&pound;</span><!--
+    --><span class="price-major-size" [innerHtml]="value.major || '0'"></span><!-- 
+    --><span class="price-minor-size">.</span><!--
+    --><span class="price-minor-size" [innerHtml]="value.minor || '0'"></span><!--
+    --><span class="price-minor-size" *ngIf="value.minor < 10 || !price.minor">0</span><!--
+--></span>

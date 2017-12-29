@@ -7,7 +7,8 @@ import {
     AppModalComponent,
     SplashBannerComponent,
     ScriptHackComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    PriceComponent
     } from "./components";
 
 @NgModule({
@@ -20,7 +21,8 @@ import {
         AppModalComponent,
         SplashBannerComponent,
         ScriptHackComponent,
-        ContactUsComponent
+        ContactUsComponent,
+        PriceComponent
     ],
     exports: [
         CommonModule,
@@ -28,7 +30,8 @@ import {
         AppModalComponent,
         SplashBannerComponent,
         ScriptHackComponent,
-        ContactUsComponent
+        ContactUsComponent,
+        PriceComponent
     ],
     providers: [
     ]

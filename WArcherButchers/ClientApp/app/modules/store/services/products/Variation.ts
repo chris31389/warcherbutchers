@@ -1,4 +1,5 @@
-﻿import {Weight, Price} from "./";
+﻿import {Weight} from "./";
+import { Price } from "../../../";
 
 export class Variation {
     name: string;

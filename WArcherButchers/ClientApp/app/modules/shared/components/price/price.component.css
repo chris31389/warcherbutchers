@@ -1,0 +1,14 @@
+﻿.price-highlight .price-major-size{
+    font-size:24px;
+}
+.price-highlight .price-minor-size{
+    font-size:12px;
+    vertical-align: top;
+    padding-top:5px;
+    line-height: 28px;
+}
+.price-highlight .price-currency{
+    font-size:18px;
+    vertical-align: bottom;
+    line-height: 32px;
+}

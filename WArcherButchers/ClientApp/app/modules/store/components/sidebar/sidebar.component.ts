@@ -1,5 +1,5 @@
 ﻿import { Component, Input } from "@angular/core";
-import { Basket, Price } from "../../";
+import { Basket } from "../../";
 
 @Component({
     selector: "sidebar",
@@ -10,8 +10,7 @@ export class SidebarComponent {
     @Input()
     basket: Basket;
 
-    deliveryLimit = new Price({major:75,minor:0});
-
+    
     constructor() {
         
     }

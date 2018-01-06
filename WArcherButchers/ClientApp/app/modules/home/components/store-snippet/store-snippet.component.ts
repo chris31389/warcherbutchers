@@ -1,4 +1,6 @@
-﻿import { Component/*, AfterViewInit*/ } from "@angular/core";
+﻿import { Component /*, AfterViewInit*/
+    } from "@angular/core";
+import { Product, ProductService } from "../../../";
 
 @Component({
     selector: "store-snippet",
@@ -6,10 +8,18 @@
     styleUrls: ["./store-snippet.component.css"]
 })
 export class StoreSnippetComponent /*implements AfterViewInit*/ {
-    storeInfo ={
+    product: Product;
+    storeInfo = {
         message: "There are many more products available for purchase.  Find out more by visiting our store.",
         linkMessage: "The Store"
-    }/*
+    }
+
+    constructor(private readonly productService: ProductService) {
+        this.productService.getRandomProduct()
+            .subscribe(x => this.product = x);
+    }
+
+/*
 
     ngAfterViewInit() {
         !function (d, s, id) {

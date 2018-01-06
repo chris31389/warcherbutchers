@@ -28,6 +28,6 @@ import {
         HogComponent
     ],
     exports: [RouterModule]
-} as any)
+})
 export class HomeModule {
 }

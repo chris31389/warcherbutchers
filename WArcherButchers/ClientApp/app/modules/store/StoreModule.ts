@@ -3,7 +3,8 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared";
 
 import {
-    CategoryService
+    CategoryService,
+    ProductService
     } from "./";
 
 import {
@@ -20,7 +21,8 @@ import {
         ])
     ],
     providers: [
-        CategoryService
+        CategoryService,
+        ProductService
     ],
     declarations: [
         StoreComponent,

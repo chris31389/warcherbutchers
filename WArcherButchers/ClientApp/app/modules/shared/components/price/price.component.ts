@@ -12,4 +12,6 @@ export class PriceComponent {
 
     @Input()
     highlight: boolean;
+    @Input()
+    strike: boolean;
 }

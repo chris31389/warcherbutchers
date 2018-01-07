@@ -12,3 +12,13 @@
     vertical-align: bottom;
     line-height: 32px;
 }
+
+.price-highlight {
+    padding-right: 10px;
+}
+
+.price-strike {
+    text-decoration: line-through;
+    color: #d43f3a;
+    padding-right: 10px;
+}

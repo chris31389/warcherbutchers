@@ -40,8 +40,8 @@ import {
         FormsModule,
         CoreModule,
         SharedModule,
-        HomeModule,
         StoreModule,
+        HomeModule,
         ButcheryClassesModule,
         HogRoastModule,
         SpecialityProductsModule,
@@ -52,7 +52,7 @@ import {
     providers: [
         { provide: "BASE_URL", useFactory: getBaseUrl }
     ]
-} as any)
+})
 export class AppModule {
 }
 

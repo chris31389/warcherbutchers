@@ -4,7 +4,7 @@ import { Price} from "../../../shared";
 export class Product {
     id: string;
     name: string;
-    categories: Array<string>;
+    categories = new Array<string>();
     description: string;
     detailedDescription: string;
     imageId: string;
@@ -13,6 +13,7 @@ export class Product {
     pricePerKilo: Price;
     price: Price;
     oldPrice: Price;
+    isSpeciality: boolean;
 
     constructor(json?:any) {
         if (json) {
@@ -26,6 +27,13 @@ export class Product {
             this.price = json.price ? new Price(json.price) : null;
             this.oldPrice = json.oldPrice ? new Price(json.oldPrice) : null;
             this.imageUrl = json.imageUrl;
+            this.isSpeciality = json.isSpeciality || false;
+
+            if (Array.isArray(json.categories)) {
+                json.categories.forEach(category => this.categories.push(category));
+            }
         }
     }
+
+    containsCategory = (category: string) => this.categories.findIndex(x => x === category) >= 0;
 }

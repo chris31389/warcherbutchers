@@ -17,7 +17,7 @@ export class StoreComponent {
         private readonly categoryService: CategoryService,
         private readonly productService: ProductService,
         ) {
-        this.categories = categoryService.getOptions();
+        this.categories = categoryService.categories;
         this.filteredProducts = new Array<Product>();
         this.productService.getProducts()
             .subscribe(products => {

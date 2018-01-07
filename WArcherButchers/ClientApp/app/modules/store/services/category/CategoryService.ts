@@ -2,6 +2,9 @@
 
 @Injectable()
 export class CategoryService {
-    getOptions = ():Array<string> => ["Beef", "Lamb", "Pork", "Chicken", "Game", "Christmas", "South African", "Bulk"];
-    getSpecialityOptions = (): Array<string> => ["South African"];
+    get categories(): Array<string> {
+        return ["Beef", "Lamb", "Pork", "Chicken", "Game", "Christmas", "South African", "Bulk"];
+    }
+
+    get specialityCategories(): Array<string> { return ["South African"]; }
 }

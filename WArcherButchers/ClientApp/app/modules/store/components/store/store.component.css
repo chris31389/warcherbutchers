@@ -13,22 +13,6 @@
 
 #storewrapper { padding: 5px; }
 
-#sidebar {
-    background-color: rgb(247, 245, 242);
-    width: 300px;
-    padding: 10px;
-    float: right;
-    height: 100%;
-    position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border: 5px solid #FFFFFF;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0;
-}
-
 .basket-item-total { text-align: right; }
 
 .basket-item-quantity {

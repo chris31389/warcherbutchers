@@ -1,15 +1,15 @@
 ﻿import { Component, Input, Output, EventEmitter } from "@angular/core";
-import { Product } from "../../";
+import { Product} from "../../";
 
 @Component({
-    selector: "product",
-    templateUrl: "./product.component.html",
-    styleUrls: ["./product.component.css"]
+    selector: "speciality-product",
+    templateUrl: "./speciality-product.component.html",
+    styleUrls: ["./speciality-product.component.css"]
 })
-export class ProductComponent {
+export class SpecialityProductComponent {
     @Input()
     product: Product;
-
+    
     @Output()
     addToBasket = new EventEmitter<Product>();
 

@@ -1,63 +1,64 @@
-﻿<div class="basket-title">
-    <h4 class="text-center">My Basket</h4>
-</div>
-<div class="paper">
-    <div *ngIf="basket.totalItems === 0" class="text-center">
-        <p class="vertical-align-middle">Select an item from the store to add it to the basket</p>
+﻿<div class="sidebar">
+    <div class="basket-title">
+        <h4 class="text-center">My Basket</h4>
     </div>
-    <!--
-    <div ng-repeat="item in basket.items.list" class="basket-item">
-        <div class="basket-item-name clear-float">
-            <div class="paper-inline">
-                <a href="" class="basket-item-minus" ng-click="basket.removeItem(item)">
-                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                </a>
-                <span class="basket-item-quantity" ng-bind="item.quantity"></span>
-                <a href="" class="basket-item-add" ng-click="basket.addItem(item)">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </a>
+    <div class="paper">
+        <div *ngIf="basket.totalItems === 0" class="text-center">
+            <p class="vertical-align-middle">Select an item from the store to add it to the basket</p>
+        </div>
+        <!--
+        <div ng-repeat="item in basket.items.list" class="basket-item">
+            <div class="basket-item-name clear-float">
+                <div class="paper-inline">
+                    <a href="" class="basket-item-minus" ng-click="basket.removeItem(item)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </a>
+                    <span class="basket-item-quantity" ng-bind="item.quantity"></span>
+                    <a href="" class="basket-item-add" ng-click="basket.addItem(item)">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <span ng-bind="item.name"></span>
             </div>
-            <span ng-bind="item.name"></span>
-        </div>
-        <div class="basket-item-total clear-float">
-            <a class="float-left remove-basket-item" href="" ng-click="basket.removeItems(item)">
-                <span>remove</span>
-            </a>
-            <span class="float-right" price="item.total"></span>
-        </div>
-    </div>-->
-</div>
-<div class="basket-total clear-float">
-    <p class="lead">
-        <span class="float-left">Sub-Total Cost: </span>
-        <price class="float-right" [highlight]="true" [value]="basket.subTotalCost"></price>
-    </p>
-</div>
-<div class="paper">
-    <div class="basket-item">
-        <div class="basket-item-name clear-float">
-            <div>3-5 working days delivery</div>
-            <div class="text-warning">
-                <span>*Free if order is over </span>
-                <price [value]="basket.deliveryLimit"></price>
+            <div class="basket-item-total clear-float">
+                <a class="float-left remove-basket-item" href="" ng-click="basket.removeItems(item)">
+                    <span>remove</span>
+                </a>
+                <span class="float-right" price="item.total"></span>
             </div>
-        </div>
-        <div class="basket-item-total clear-float">
-            <price class="float-right" [value]="basket.deliveryPriceApplied"></price>
+        </div>-->
+    </div>
+    <div class="basket-total clear-float">
+        <p class="lead">
+            <span class="float-left">Sub-Total Cost: </span>
+            <price class="float-right" [highlight]="true" [value]="basket.subTotalCost"></price>
+        </p>
+    </div>
+    <div class="paper">
+        <div class="basket-item">
+            <div class="basket-item-name clear-float">
+                <div>3-5 working days delivery</div>
+                <div class="text-warning">
+                    <span>*Free if order is over </span>
+                    <price [value]="basket.deliveryLimit"></price>
+                </div>
+            </div>
+            <div class="basket-item-total clear-float">
+                <price class="float-right" [value]="basket.deliveryPriceApplied"></price>
+            </div>
         </div>
     </div>
-</div>
-<div class="basket-total clear-float">
-    <p class="lead">
-        <span class="float-left">Total Cost: </span>
-        <price class="float-right" [highlight]="true" [value]="basket.totalCost"></price>
-    </p>
-</div>
-<div *ngIf="basket.totalItems > 0" class="button-bank text-center">
-    <button class="btn btn-default" type="button" (click)="basket.removeAllItems()">
-        Clear
-    </button>
-    <a class="btn btn-default checkout-link" type="button" href="#/checkout">
-        Checkout
-    </a>
-</div>
+    <div class="basket-total clear-float">
+        <p class="lead">
+            <span class="float-left">Total Cost: </span>
+            <price class="float-right" [highlight]="true" [value]="basket.totalCost"></price>
+        </p>
+    </div>
+    <div *ngIf="basket.totalItems > 0" class="button-bank text-center">
+        <button class="btn btn-default" type="button" (click)="basket.removeAllItems()">
+            Clear
+        </button>
+        <a class="btn btn-default checkout-link" type="button" href="#/checkout">
+            Checkout
+        </a>
+    </div></div>

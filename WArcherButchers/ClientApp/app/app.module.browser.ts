@@ -12,7 +12,6 @@ import {
     StoreModule,
     ButcheryClassesModule,
     HogRoastModule,
-    SpecialityProductsModule,
     OtherModule
     } from "./modules";
 
@@ -44,7 +43,6 @@ import {
         HomeModule,
         ButcheryClassesModule,
         HogRoastModule,
-        SpecialityProductsModule,
         OtherModule,
         AppRoutingModule,
         NgxPageScrollModule

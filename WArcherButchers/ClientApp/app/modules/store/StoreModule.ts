@@ -10,14 +10,17 @@ import {
 import {
     StoreComponent,
     SidebarComponent,
-    ProductComponent
+    ProductComponent,
+    SpecialityProductComponent,
+    SpecialityProductsComponent
     } from "./components";
 
 @NgModule({
     imports: [
         SharedModule,
         RouterModule.forChild([
-            { path: "store", component: StoreComponent }
+            { path: "store", component: StoreComponent },
+            { path: "speciality-products", component: SpecialityProductsComponent }
         ])
     ],
     providers: [
@@ -27,7 +30,9 @@ import {
     declarations: [
         StoreComponent,
         SidebarComponent,
-        ProductComponent
+        ProductComponent,
+        SpecialityProductComponent,
+        SpecialityProductsComponent
     ],
     exports: [
         RouterModule,

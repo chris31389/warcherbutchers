@@ -24,6 +24,6 @@ import {
         StoryComponent
     ],
     exports: [RouterModule]
-} as any)
+})
 export class HogRoastModule {
 }

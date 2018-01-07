@@ -1,6 +1,6 @@
 ﻿import { Product, Basket } from "../../";
 import { Component } from "@angular/core";
-import { CategoryService } from "../../";
+import { CategoryService, ProductService } from "../../";
 
 @Component({
     selector: "store",
@@ -13,17 +13,17 @@ export class StoreComponent {
     categories: Array<string> = [];
     filteredProducts: Array<Product>;
 
-    constructor(private categoryService: CategoryService) {
+    constructor(
+        private readonly categoryService: CategoryService,
+        private readonly productService: ProductService,
+        ) {
         this.categories = categoryService.getOptions();
-        this.products = new Array<Product>();
-        this.products.push(new Product({
-            name: "Biltong",
-            description: "Description",
-            detailedDescription: "Detailed Description"
-        }));
-
         this.filteredProducts = new Array<Product>();
-        this.products.forEach(product => this.filteredProducts.push(product));
+        this.productService.getProducts()
+            .subscribe(products => {
+                this.products = products;
+                this.products.forEach(product => this.filteredProducts.push(product));
+            });
         this.basket = new Basket();
     }
 

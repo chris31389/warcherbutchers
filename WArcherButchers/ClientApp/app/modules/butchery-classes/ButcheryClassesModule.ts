@@ -20,6 +20,6 @@ import {
         OnOfferComponent
     ],
     exports: [RouterModule]
-} as any)
+})
 export class ButcheryClassesModule {
 }

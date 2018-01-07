@@ -10,7 +10,7 @@
             <price [highlight]="true" [value]="product.price"></price>
         </div>
         <div class="pad-top-10">
-            <button *ngIf="addItem" class="btn btn-default btn-xs add-item" type="button" (click)="addItem(product)">
+            <button *ngIf="isAddToBasketUsed" class="btn btn-default btn-xs add-item" type="button" (click)="addItem(product)">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 <span class="product-add-label">Add Item</span>
             </button>

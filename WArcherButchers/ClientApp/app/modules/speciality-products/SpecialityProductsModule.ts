@@ -18,6 +18,6 @@ import {
         SpecialityProductsComponent
     ],
     exports: [RouterModule]
-} as any)
+})
 export class SpecialityProductsModule {
 }

@@ -13,5 +13,11 @@ export class ProductComponent {
     @Output()
     addToBasket = new EventEmitter<any>();
 
-    add = this.addToBasket.emit(this.product);
+    private isAddToBasketUsed = false;
+
+    ngOnInit() {
+        this.isAddToBasketUsed = this.addToBasket.observers.length > 0;
+    }
+
+    addItem = () => this.addToBasket.emit(this.product);
 }

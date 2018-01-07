@@ -18,6 +18,6 @@ import {
         TermsAndConditionsComponent
     ],
     exports: [RouterModule]
-} as any)
+})
 export class OtherModule {
 }

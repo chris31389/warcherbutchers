@@ -8,6 +8,7 @@ export class Product {
     description: string;
     detailedDescription: string;
     imageId: string;
+    imageUrl: string;
     variationId: string;
     pricePerKilo: Price;
     price: Price;
@@ -24,6 +25,7 @@ export class Product {
             this.pricePerKilo = json.pricePerKilo ? new Price(json.pricePerKilo) : null;
             this.price = json.price ? new Price(json.price) : null;
             this.oldPrice = json.oldPrice ? new Price(json.oldPrice) : null;
+            this.imageUrl = json.imageUrl;
         }
     }
 }

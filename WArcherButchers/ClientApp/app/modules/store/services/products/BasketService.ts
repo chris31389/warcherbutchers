@@ -1,4 +1,4 @@
-﻿import { Basket, ProductSelection, ProductService } from "./";
+﻿import { Basket, ProductSelection, ProductService, DeliveryInfo } from "./";
 
 export class BasketService {
     basket = null;
@@ -6,7 +6,8 @@ export class BasketService {
     constructor(
     ) {
         const productService = new ProductService();
-        const basketItems = new Array<ProductSelection>()
+        const basketItems = new Array<ProductSelection>();
+        const deliveryInfo = new DeliveryInfo();
 
         const foundItems = localStorage.getItem("basketItems");
         if (foundItems) {
@@ -24,7 +25,7 @@ export class BasketService {
             }
         }
 
-        this.basket = new Basket(basketItems, this.updateStorage);
+        this.basket = new Basket(basketItems, deliveryInfo, this.updateStorage);
     }
 
     private updateStorage(selection: Array<ProductSelection>): void {

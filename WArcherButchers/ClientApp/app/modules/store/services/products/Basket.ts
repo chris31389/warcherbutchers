@@ -1,21 +1,37 @@
-﻿import {ProductSelection, Product, BasketService} from "./";
+﻿import {ProductSelection, Product, DeliveryInfo} from "./";
 import { Price } from "../../../";
 
 export class Basket {
     items: Array<ProductSelection>;
-    subTotalCost = new Price();
-    totalCost = new Price();
-    deliveryLimit = new Price({ major: 75, minor: 0 });
-    deliveryPriceApplied = new Price();
     private saveItems: (selection: Array<ProductSelection>) => void;
+    private deliveryInfo: DeliveryInfo;
 
-    get totalItems() { return this.items.length; };
+    get subTotalCost(): Price {
+        let price = new Price();
+
+        this.items.forEach(selectedProduct =>
+            price = price.add(selectedProduct.product.price.multiplyBy(selectedProduct.quantity)));
+
+        return price;
+    }
+
+    get totalCost(): Price { return this.subTotalCost.add(this.deliveryPriceApplied); }
+
+    get totalItems() { return this.items.length; }
+
+    get deliveryPriceApplied(): Price {
+        return this.subTotalCost.lessThan(this.deliveryInfo.limit)
+            ? this.deliveryInfo.cost
+            : new Price();
+    }
 
     constructor(
         items: Array<ProductSelection>,
+        deliveryInfo: DeliveryInfo,
         update: (selection: Array<ProductSelection>) => void
     ) {
         this.items = items;
+        this.deliveryInfo = deliveryInfo;
         this.saveItems = update;
     }
 

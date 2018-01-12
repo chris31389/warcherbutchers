@@ -33,5 +33,5 @@ export class StoreComponent {
 
     products: Array<Product>;
 
-    addToBasket = (product: Product) => {};
+    addToBasket = (product: Product) => this.basket.add(product);
 }

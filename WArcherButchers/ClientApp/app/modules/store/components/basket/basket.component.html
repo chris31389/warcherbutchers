@@ -6,27 +6,26 @@
         <div *ngIf="basket.totalItems === 0" class="text-center">
             <p class="vertical-align-middle">Select an item from the store to add it to the basket</p>
         </div>
-        <!--
-        <div ng-repeat="item in basket.items.list" class="basket-item">
+        <div *ngFor="let item of basket.items" class="basket-item">
             <div class="basket-item-name clear-float">
                 <div class="paper-inline">
-                    <a href="" class="basket-item-minus" ng-click="basket.removeItem(item)">
+                    <a href="javascript:void(0)" class="basket-item-minus" (click)="basket.remove(item.product);false">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </a>
-                    <span class="basket-item-quantity" ng-bind="item.quantity"></span>
-                    <a href="" class="basket-item-add" ng-click="basket.addItem(item)">
+                    <span class="basket-item-quantity" [innerHtml]="item.quantity"></span>
+                    <a href="javascript:void(0)" class="btn btn-xs basket-item-add" (click)="basket.add(item.product);false">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     </a>
                 </div>
-                <span ng-bind="item.name"></span>
+                <span [innerHtml]="item.product.name"></span>
             </div>
             <div class="basket-item-total clear-float">
-                <a class="float-left remove-basket-item" href="" ng-click="basket.removeItems(item)">
+                <a href="javascript:void(0)" class="float-left remove-basket-item" (click)="basket.removeItem(item)">
                     <span>remove</span>
                 </a>
                 <span class="float-right" price="item.total"></span>
             </div>
-        </div>-->
+        </div>
     </div>
     <div class="basket-total clear-float">
         <p class="lead">
@@ -58,7 +57,8 @@
         <button class="btn btn-default" type="button" (click)="basket.removeAllItems()">
             Clear
         </button>
-        <a class="btn btn-default checkout-link" type="button" href="#/checkout">
+        <a class="btn btn-default checkout-link" type="button" [routerLink]="['/checkout']">
             Checkout
         </a>
-    </div></div>
+    </div>
+</div>

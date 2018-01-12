@@ -10,10 +10,7 @@ export class BasketComponent {
     @Input()
     basket: Basket;
 
-    
-    constructor() {
-        
-    }
+
 }
 
 /*

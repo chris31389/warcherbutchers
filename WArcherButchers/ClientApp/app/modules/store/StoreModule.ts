@@ -9,6 +9,7 @@ import {
     } from "./";
 
 import {
+    CheckoutComponent,
     StoreComponent,
     BasketComponent,
     ProductComponent,
@@ -21,16 +22,18 @@ import {
         SharedModule,
         RouterModule.forChild([
             { path: "store", component: StoreComponent },
+            { path: "checkout", component: CheckoutComponent },
             { path: "speciality-products", component: SpecialityProductsComponent }
         ])
     ],
     providers: [
-        BasketService,
         CategoryService,
-        ProductService
+        ProductService,
+        BasketService
     ],
     declarations: [
         StoreComponent,
+        CheckoutComponent,
         BasketComponent,
         ProductComponent,
         SpecialityProductComponent,

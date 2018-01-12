@@ -17,7 +17,7 @@ export class Product {
 
     constructor(json?:any) {
         if (json) {
-            this.id = json.id;
+            this.id = json.productId ? json.productId : json.id;
             this.name = json.name;
             this.description = json.description;
             this.detailedDescription = json.detailedDescription;

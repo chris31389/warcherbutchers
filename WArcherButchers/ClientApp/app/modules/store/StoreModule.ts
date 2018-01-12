@@ -4,12 +4,13 @@ import { SharedModule } from "../shared";
 
 import {
     CategoryService,
-    ProductService
+    ProductService,
+    BasketService
     } from "./";
 
 import {
     StoreComponent,
-    SidebarComponent,
+    BasketComponent,
     ProductComponent,
     SpecialityProductComponent,
     SpecialityProductsComponent
@@ -24,12 +25,13 @@ import {
         ])
     ],
     providers: [
+        BasketService,
         CategoryService,
         ProductService
     ],
     declarations: [
         StoreComponent,
-        SidebarComponent,
+        BasketComponent,
         ProductComponent,
         SpecialityProductComponent,
         SpecialityProductsComponent

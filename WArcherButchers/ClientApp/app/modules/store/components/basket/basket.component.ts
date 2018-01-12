@@ -2,11 +2,11 @@
 import { Basket } from "../../";
 
 @Component({
-    selector: "sidebar",
-    templateUrl: "./sidebar.component.html",
-    styleUrls: [ "./sidebar.component.css" ]
+    selector: "basket",
+    templateUrl: "./basket.component.html",
+    styleUrls: [ "./basket.component.css" ]
 })
-export class SidebarComponent {
+export class BasketComponent {
     @Input()
     basket: Basket;
 

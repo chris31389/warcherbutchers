@@ -1,5 +1,5 @@
 ﻿import { Component } from "@angular/core";
-import { Basket, Product, ProductService} from "../../";
+import { Basket, BasketService, Product, ProductService} from "../../";
 
 @Component({
     selector: "speciality-products",
@@ -16,11 +16,13 @@ export class SpecialityProductsComponent {
         caption: "Something special you won't find elsewhere"
     }
 
-    constructor(private readonly productService: ProductService) {
+    constructor(
+        private readonly basketService: BasketService,
+        private readonly productService: ProductService) {
         this.productService.getSpecialityProducts()
             .subscribe(products => this.specialityProducts = products);
 
-        this.basket = new Basket();
+        this.basket = this.basketService.basket;
     }
 
     addToBasket = (product: Product) => { };

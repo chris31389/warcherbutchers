@@ -17,15 +17,14 @@
 
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Compile Remove="ClientApp\app\modules\speciality-products\**" />
     <Content Remove="ClientApp\**" />
+    <EmbeddedResource Remove="ClientApp\app\modules\speciality-products\**" />
+    <None Remove="ClientApp\app\modules\speciality-products\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="ClientApp\favicon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\app\modules\speciality-products\components\assets\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

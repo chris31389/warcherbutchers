@@ -20,6 +20,9 @@
     margin-left: 150px;
     padding: 10px 20px;
 }
+.checkout-product-totals {
+    padding: 10px 20px;
+}
 
 .checkout-total{
 }
@@ -70,6 +73,10 @@
     text-decoration: underline;
 }
 
+.not-required {
+    font-weight: normal !important;
+}
+
 @media screen and (max-width: 767px) {
     .checkout-product-img{
         width: 105px;
@@ -83,6 +90,9 @@
     .checkout-product-details {
         width: calc(100% - 105px);
         margin-left: 105px;
+        padding: 5px 10px;
+    }
+    .checkout-product-totals {
         padding: 5px 10px;
     }
 

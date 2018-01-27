@@ -1,138 +1,237 @@
 ﻿<section class="content">
-    <section class="checkoutList">
-        <article class="container">
-            <h2 class="section-title" [innerHtml]="title"></h2>
+<section class="checkoutList">
+    <article class="container">
+        <h2 class="section-title" [innerHtml]="title"></h2>
 
-            <div class="line"></div>
-            <div class="row checkout-header">
-                <div class="checkout-product-details">
-                    <span class="col-sm-6 checkout-header-title-item">Item</span>
-                    <span class="col-sm-2 checkout-header-title-item text-right">Price</span>
-                    <span class="col-sm-2 checkout-header-title-item text-center">Quantity</span>
-                    <span class="col-sm-2 checkout-header-title-item text-right">Total</span>
+        <div class="line"></div>
+        <div class="row checkout-header">
+            <div class="checkout-product-details">
+                <span class="col-sm-6 checkout-header-title-item">Item</span>
+                <span class="col-sm-2 checkout-header-title-item text-right">Price</span>
+                <span class="col-sm-2 checkout-header-title-item text-center">Quantity</span>
+                <span class="col-sm-2 checkout-header-title-item text-right">Total</span>
+            </div>
+        </div>
+        <div *ngFor="let item of basket.items" class="row checkout-row checkout-item">
+            <img class="checkout-product-img float-left" [src]="item.product.imageUrl || 'dist/assets/no-photo-300x200.jpg'" alt="product-image"/>
+
+            <div class="checkout-product-details">
+                <span class="col-sm-6 col-xs-12 checkout-product-title" [innerHtml]="item.product.name"></span>
+                <span class="col-sm-2 col-xs-3 text-right">
+                    <price [highlight]="true" [value]="item.product.price"></price>
+                </span>
+
+                <div class="col-sm-2 col-xs-5 checkout-product-quantity-container text-center">
+                    <a href="javascript:void(0)" class="basket-item-minus" (click)="basket.remove(item.product)">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </a>
+                    <span class="checkout-product-quantity" [innerHtml]="item.quantity"></span>
+                    <a href="javascript:void(0)" class="basket-item-add" (click)="basket.add(item.product)">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </a>
+                </div>
+                <span class="col-sm-2 col-xs-4 text-right">
+                    <price [highlight]="true" [value]="item.totalCost"></price>
+                </span>
+            </div>
+        </div>
+        <div class="row checkout-row checkout-item">
+            <div class="checkout-product-totals">
+                <div class="col-sm-10 col-xs-8">
+                    <div class="checkout-product-total">Sub-Total</div>
+                </div>
+                <div class="col-sm-2 col-xs-4 text-right">
+                    <price [highlight]="true" [value]="basket.subTotalCost"></price>
                 </div>
             </div>
-            <div *ngFor="let item of basket.items" class="row checkout-row checkout-item">
-                <img class="checkout-product-img float-left" [src]="item.product.imageUrl || 'dist/assets/no-photo-300x200.jpg'" alt="product-image"/>
-
-                <div class="checkout-product-details">
-                    <span class="col-sm-6 col-xs-12 checkout-product-title" [innerHtml]="item.product.name"></span>
-                    <span class="col-sm-2 col-xs-3 text-right">
-                        <price [highlight]="true" [value]="item.product.price"></price>
-                    </span>
-
-                    <div class="col-sm-2 col-xs-5 checkout-product-quantity-container text-center">
-                        <a href="javascript:void(0)" class="basket-item-minus" (click)="basket.remove(item.product)">
-                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                        </a>
-                        <span class="checkout-product-quantity" [innerHtml]="item.quantity"></span>
-                        <a href="javascript:void(0)" class="basket-item-add" (click)="basket.add(item.product)">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </a>
+        </div>
+        <div class="row checkout-row checkout-item">
+            <div class="checkout-product-totals">
+                <div class="col-sm-10 col-xs-8">
+                    <div class="checkout-product-title">
+                        <div>3-5 working days delivery</div>
                     </div>
-                    <span class="col-sm-2 col-xs-4 text-right">
-                        <price [highlight]="true" [value]="item.totalCost"></price>
-                    </span>
+                    <div class="text-warning"
+                         *ngIf="!basket.deliveryPriceApplied.isZero()">
+                        <span>*To get free delivery, make sure your sub total is below </span>
+                        <price [value]="basket.deliveryInfo.limit"></price>
+                    </div>
+                </div>
+
+                <div class="col-sm-2 col-xs-4 text-right">
+                    <price [highlight]="true" [value]="basket.deliveryPriceApplied"></price>
                 </div>
             </div>
-            <div class="row checkout-row checkout-item">
-                <div class="checkout-product-details">
-                    <span class="col-xs-10">
-                        <span class="pad-right-20 checkout-product-total">Sub-Total</span>
-                    </span>
-                    <span class="col-xs-2 text-right">
-                        <price [highlight]="true" [value]="basket.subTotalCost"></price>
-                    </span>
+        </div>
+        <div class="row checkout-row checkout-item">
+            <div class="checkout-product-totals">
+                <div class="col-sm-10 col-xs-8">
+                    <div class="checkout-product-total">Total</div>
+                </div>
+                <div class="col-sm-2 col-xs-4 text-right">
+                    <price [highlight]="true" [value]="basket.totalCost"></price>
                 </div>
             </div>
-            <div class="row checkout-row checkout-item">
-                <div class="checkout-product-details">
-                    <div class="col-sm-6 col-xs-12">
-                        <div class="checkout-product-title">
-                            <div>3-5 working days delivery</div>
+        </div>
+    </article>
+</section>
+<section class="paymentFormDataInput">
+    <article class="container">
+        <h2 class="section-title" [innerHtml]="yourDetails"></h2>
+
+        <div class="line"></div>
+        <form #deliveryForm="ngForm" (ngSubmit)="submitForm()">
+            <div class="row">
+                <div class="col-sm-6">
+                    <article class="container-fluid">
+                        <div class="row">
+                            <h4 class="section-subtitle">
+                                Customer Details
+                            </h4>
                         </div>
-                        <div class="text-warning"
-                             *ngIf="!basket.deliveryPriceApplied.isZero()">
-                            <span>*To get free delivery, make sure your sub total is below </span>
-                            <price [value]="basket.deliveryInfo.limit"></price>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label for="name">Full Name of Recipient</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="name"
+                                       required
+                                       pattern="[a-zA-Z][a-zA-Z ]*"
+                                       [(ngModel)]="customerData.name" name="name" #name="ngModel"/>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4 col-xs-8">
-                    </div>
-
-                    <span class="col-sm-2 col-xs-4 text-right">
-                        <price [highlight]="true" [value]="basket.deliveryPriceApplied"></price>
-                    </span>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label for="email">Email Address for receipt</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="email"
+                                       required
+                                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                                       [(ngModel)]="customerData.emailAddress" name="email" #email="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label for="email">Contact Phone Number</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="phoneNumber"
+                                       required
+                                       minlength="10"
+                                       pattern="([\+])*[0-9]*"
+                                       [(ngModel)]="customerData.phoneNumber" name="phoneNumber" #phoneNumber="ngModel"/>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-sm-6">
+                    <article class="container-fluid">
+                        <div class="row">
+                            <h4 class="section-subtitle">
+                                Delivery Details
+                            </h4>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label for="name">Address Line 1</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="address1"
+                                       required
+                                       [(ngModel)]="customerData.address1" name="address1" #address1="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label class="not-required" for="name">Address Line 2</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="address2"
+                                       [(ngModel)]="customerData.address2" name="address2" #address2="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label class="not-required" for="name">Address Line 3</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="address3"
+                                       [(ngModel)]="customerData.address3" name="address3" #address3="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label class="not-required" for="name">Address Line 4</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="address4"
+                                       [(ngModel)]="customerData.address4" name="address4" #address4="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label for="name">City</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="city"
+                                       required
+                                       [(ngModel)]="customerData.city" name="city" #city="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label class="not-required" for="name">County</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="county"
+                                       [(ngModel)]="customerData.state" name="county" #county="ngModel"/>
+                            </div>
+                        </div>
+                        <div class="form-group row equal">
+                            <div class="col-xs-4">
+                                <label for="name">Post Code</label>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="text" class="form-control" id="postCode"
+                                       required
+                                       [(ngModel)]="customerData.postCode" name="postCode" #postCode="ngModel"/>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <div class="row checkout-row checkout-item">
-                <div class="checkout-product-details">
-                    <span class="col-xs-10">
-                        <span class="pad-right-20 checkout-product-total">Total</span>
-                    </span>
-                    <span class="col-xs-2 text-right">
-                        <price [highlight]="true" [value]="basket.totalCost"></price>
-                    </span>
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+                <div [hidden]="!name.hasError('required')">Name is required</div>
+                <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
+            </div>
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+                <div [hidden]="!email.hasError('required')">Email is required</div>
+                <div [hidden]="!email.hasError('pattern')">
+                    Email format should be
+                    <small>
+                        <b>joe@abc.com</b>
+                    </small>
                 </div>
             </div>
-        </article>
-    </section>
-    <section class="paymentFormDataInput">
-        <article class="container">
-            <h2 class="section-title" [innerHtml]="yourDetails"></h2>
-
-            <div class="line"></div>
-            <div class="row text-center">
-                <div class="col-xs-12">
-                    <div class="alert alert-warning input-required-label" role="alert">Required fields are underlined</div>
-                </div>
+            <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
+                <div [hidden]="!phoneNumber.hasError('minlength')">Phone Number should be at least 10 digits</div>
+                <div [hidden]="!phoneNumber.hasError('required')">Phone Number is required</div>
+                <div [hidden]="!phoneNumber.hasError('pattern')">Phone Number should be only numbers</div>
             </div>
-            <form #deliveryForm="ngForm" (ngSubmit)="submitForm(complexForm.value)">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <article class="container-fluid">
-                            <div class="row">
-                                <h4 class="section-subtitle">
-                                    Customer Details
-                                </h4>
-                            </div>
-                            <div class="form-group row equal">
-                                <div class="col-xs-4">
-                                    <label for="name">Full Name of Recipient</label>
-                                </div>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control" id="name"
-                                           required
-                                           pattern="[a-zA-Z][a-zA-Z ]*"
-                                           [(ngModel)]="customerData.name" name="name" #name="ngModel"/>
-                                </div>
-                            </div>
-                            <div class="form-group row equal">
-                                <div class="col-xs-4">
-                                    <label for="email">Email Address for receipt</label>
-                                </div>
-                                <div class="col-xs-8">
-                                    <input type="text" class="form-control" id="email"
-                                           required
-                                           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-                                           [(ngModel)]="customerData.emailAddress" name="email" #email="ngModel"/>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-                    <div [hidden]="!name.hasError('required')">Name is required</div>
-                    <div [hidden]="!name.hasError('pattern')">Only alphabetsallowed</div>
-                </div>
-                <div [hidden]="email.valid || email.pristine"
-                     class="alert alert-danger">
-                    <div [hidden]="!email.hasError('required')">Email is required</div>
-                    <div [hidden]="!email.hasError('pattern')">Email format should be 
-                        <small><b>joe@abc.com</b></small>
-                    </div>
-                </div>
-            </form>
-        </article>
-    </section>
+            <div [hidden]="address1.valid || address1.pristine" class="alert alert-danger">
+                <div [hidden]="!address1.hasError('required')">Address Line 1 is required</div>
+            </div>
+            <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                <div [hidden]="!city.hasError('required')">City is required</div>
+            </div>
+            <div [hidden]="postCode.valid || postCode.pristine" class="alert alert-danger">
+                <div [hidden]="!postCode.hasError('required')">Post Code is required</div>
+            </div>
+            <button type="submit" class="btn btn-success btn-block" [disabled]="!deliveryForm.form.valid">
+                <span [innerHtml]="payBtn"></span>
+            </button>
+        </form>
+    </article>
+</section>
 </section>

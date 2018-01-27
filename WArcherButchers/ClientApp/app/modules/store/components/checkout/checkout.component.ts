@@ -28,5 +28,5 @@ export class CheckoutComponent {
         this.basket = this.basketService.basket;
     }
 
-    submitForm = (value:any) => { console.log(value)};
+    submitForm = () => { console.log(this.customerData)};
 }

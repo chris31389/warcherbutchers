@@ -1,4 +1,5 @@
 ﻿export * from "./Basket";
+export * from "./CustomerData";
 export * from "./DeliveryInfo";
 export * from "./Product";
 export * from "./ProductService";

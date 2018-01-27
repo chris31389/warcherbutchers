@@ -1,4 +1,5 @@
 ﻿import { Product } from "./";
+import { Price } from "../../../";
 
 export class ProductSelection {
     product: Product;
@@ -8,4 +9,6 @@ export class ProductSelection {
         this.product = product;
         this.quantity = quantity ? quantity : 1;
     }
+
+    get totalCost(): Price { return this.product.price.multiplyBy(this.quantity); }
 }

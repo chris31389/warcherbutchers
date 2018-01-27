@@ -779,7 +779,6 @@ export class ProductService {
         "name": "Leicestershire long horn Minced Beef (5kg)",
         "description": "Makes a tasty chilli!",
         "imageId": "55eed9cf672ed712a1b55048",
-        "imageUrl": "/images/55eed9cf672ed712a1b55048",
         "price": { "major": 29, "minor": 0 },
         "variationId": "55fd309b0a85b0ff7af2d199",
         "weight": { "unit": "kg", "value": 5 },

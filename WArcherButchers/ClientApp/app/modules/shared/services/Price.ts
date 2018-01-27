@@ -19,6 +19,10 @@
         this.minor = json && json.minor ? json.minor : 0;
     }
 
+    isZero(): boolean {
+        return this.major === 0 && this.minor === 0;
+    }
+
     lessThan(price: Price): boolean {
         if (this.major < price.major) return true;
         if (this.major > price.major) return false;

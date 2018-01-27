@@ -1,6 +1,11 @@
-﻿import { Product, Basket } from "../../";
-import { Component } from "@angular/core";
-import { CategoryService, ProductService, BasketService } from "../../";
+﻿import { Component } from "@angular/core";
+import {
+    Product,
+    Basket,
+    CategoryService,
+    ProductService,
+    BasketService
+    } from "../../";
 
 @Component({
     selector: "store",
@@ -12,6 +17,7 @@ export class StoreComponent {
     searchTerm: string = "";
     categories: Array<string> = [];
     filteredProducts: Array<Product>;
+    products: Array<Product>;
 
     constructor(
         private readonly basketService: BasketService,
@@ -30,8 +36,6 @@ export class StoreComponent {
 
     updateFilterItems = () => {}
     includeCategory = (category: any) => {}
-
-    products: Array<Product>;
 
     addToBasket = (product: Product) => this.basket.add(product);
 }

@@ -4,14 +4,11 @@ import { Price } from "../../../";
 export class Basket {
     items: Array<ProductSelection>;
     private saveItems: (selection: Array<ProductSelection>) => void;
-    private deliveryInfo: DeliveryInfo;
+    deliveryInfo: DeliveryInfo;
 
     get subTotalCost(): Price {
         let price = new Price();
-
-        this.items.forEach(selectedProduct =>
-            price = price.add(selectedProduct.product.price.multiplyBy(selectedProduct.quantity)));
-
+        this.items.forEach(selectedProduct => price = price.add(selectedProduct.totalCost));
         return price;
     }
 

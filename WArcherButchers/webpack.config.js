@@ -44,7 +44,7 @@ module.exports = (env) => {
                     manifest: require("./wwwroot/dist/vendor-manifest.json")
                 }),
                 new CopyWebpackPlugin([
-                    { from: "Styles" }
+                    { from: "ClientApp/app/styles" }
                 ]),
                 new CopyWebpackPlugin([
                     { from: "ClientApp/**/*.png", to: "assets", flatten:true },

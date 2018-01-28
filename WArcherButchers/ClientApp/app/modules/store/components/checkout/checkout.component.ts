@@ -20,6 +20,7 @@ export class CheckoutComponent {
     title = "Checkout";
     yourDetails = "Your Details";
     payBtn = "Continue to Payment";
+    submitClicked = false;
     constructor(
         private readonly basketService: BasketService,
         private readonly categoryService: CategoryService,
@@ -28,5 +29,8 @@ export class CheckoutComponent {
         this.basket = this.basketService.basket;
     }
 
-    submitForm = () => { console.log(this.customerData)};
+    submitForm = () => {
+        this.submitClicked = true;
+
+    };
 }

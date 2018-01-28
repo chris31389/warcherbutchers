@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WArcherButchers.Infrastructure.Settings;
 
-namespace WArcherButchers.Controllers
+namespace WArcherButchers.ServerApp.Controllers
 {
     public class HomeController : Controller
     {

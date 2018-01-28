@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WArcherButchers.Controllers
+namespace WArcherButchers.ServerApp.Controllers
 {
     public class ProductController : Controller
     {

@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace WArcherButchers.ServerApp.PaymentSense
 {
     public class HashDigestFactory
     {
-        public string Create(PaymentSenseRequestDto paymentSenseRequestDto)
+        /*public string Create(PaymentSenseRequestDto paymentSenseRequestDto)
         {
             string stringToHash = GetStringToHash(paymentSenseRequestDto);
             byte[] body = StringToByteArray(stringToHash);
@@ -15,59 +15,58 @@ namespace WArcherButchers.ServerApp.PaymentSense
             byte[] hashDigest = sha1.ComputeHash(body);
             return ByteArrayToHexString(hashDigest);
         }
-
-        public static string GetStringToHash(PaymentSenseRequestDto paymentSenseRequestDto)
+*/
+        public static string GetStringToHash(Dictionary<string,object> formValues, string preSharedKey, string password)
         {
-            Dictionary<string, object> pairs = new Dictionary<string, object>();
-            pairs.Add("PreSharedKey", paymentSenseRequestDto.PreSharedKey);
-            pairs.Add("MerchantID", paymentSenseRequestDto.MerchantID);
-            pairs.Add("Password", paymentSenseRequestDto.Password);
-            pairs.Add("Amount", paymentSenseRequestDto.AmountInPence);
-            pairs.Add("CurrencyCode", paymentSenseRequestDto.CurrencyCode);
-            pairs.Add("EchoAVSCheckResult", paymentSenseRequestDto.EchoAVSCheckResult);
-            pairs.Add("EchoCV2CheckResult", paymentSenseRequestDto.EchoCV2CheckResult);
-            pairs.Add("EchoThreeDSecureAuthenticationCheckResult", paymentSenseRequestDto.EchoThreeDSecureAuthenticationCheckResult);
-            pairs.Add("EchoCardType", paymentSenseRequestDto.EchoCardType);
-            pairs.Add("EchoCardNumberFirstSix", paymentSenseRequestDto.EchoCardNumberFirstSix);
-            pairs.Add("EchoCardNumberLastFour", paymentSenseRequestDto.EchoCardNumberLastFour);
-            pairs.Add("EchoCardExpiryDate", paymentSenseRequestDto.EchoCardExpiryDate);
-            pairs.Add("EchoDonationAmount", paymentSenseRequestDto.EchoDonationAmount);
-            pairs.Add("AVSOverridePolicy", paymentSenseRequestDto.AVSOverridePolicy);
-            pairs.Add("CV2OverridePolicy", paymentSenseRequestDto.CV2OverridePolicy);
-            pairs.Add("ThreeDSecureOverridePolicy", paymentSenseRequestDto.ThreeDSecureOverridePolicy);
-            pairs.Add("OrderID", paymentSenseRequestDto.OrderID);
-            pairs.Add("TransactionType", paymentSenseRequestDto.TransactionType);
-            pairs.Add("TransactionDateTime", paymentSenseRequestDto.TransactionDateTime);
-            pairs.Add("CallbackURL", paymentSenseRequestDto.CallbackURL);
-            pairs.Add("OrderDescription", paymentSenseRequestDto.OrderDescription);
-            pairs.Add("CustomerName", paymentSenseRequestDto.CustomerName);
-            pairs.Add("Address1", paymentSenseRequestDto.Address1);
-            pairs.Add("Address2", paymentSenseRequestDto.Address2);
-            pairs.Add("Address3", paymentSenseRequestDto.Address3);
-            pairs.Add("Address4", paymentSenseRequestDto.Address4);
-            pairs.Add("City", paymentSenseRequestDto.City);
-            pairs.Add("State", paymentSenseRequestDto.State);
-            pairs.Add("PostCode", paymentSenseRequestDto.PostCode);
-            pairs.Add("CountryCode", paymentSenseRequestDto.CountryCode);
-            pairs.Add("EmailAddress", paymentSenseRequestDto.EmailAddress);
-            pairs.Add("PhoneNumber", paymentSenseRequestDto.PhoneNumber);
-            pairs.Add("DateOfBirth", paymentSenseRequestDto.DateOfBirth);
-            pairs.Add("EmailAddressEditable", paymentSenseRequestDto.EmailAddressEditable);
-            pairs.Add("PhoneNumberEditable", paymentSenseRequestDto.PhoneNumberEditable);
-            pairs.Add("DateOfBirthEditable", paymentSenseRequestDto.DateOfBirthEditable);
-            pairs.Add("CV2Mandatory", paymentSenseRequestDto.CV2Mandatory);
-            pairs.Add("Address1Mandatory", paymentSenseRequestDto.Address1Mandatory);
-            pairs.Add("CityMandatory", paymentSenseRequestDto.CityMandatory);
-            pairs.Add("PostCodeMandatory", paymentSenseRequestDto.PostCodeMandatory);
-            pairs.Add("StateMandatory", paymentSenseRequestDto.StateMandatory);
-            pairs.Add("CountryMandatory", paymentSenseRequestDto.CountryMandatory);
-            pairs.Add("ResultDeliveryMethod", paymentSenseRequestDto.ResultDeliveryMethod);
-            pairs.Add("ServerResultURL", paymentSenseRequestDto.ServerResultURL);
-            pairs.Add("PaymentFormDisplaysResult", paymentSenseRequestDto.PaymentFormDisplaysResult);
-            pairs.Add("PrimaryAccountName", paymentSenseRequestDto.PrimaryAccountName);
-            pairs.Add("PrimaryAccountNumber", paymentSenseRequestDto.PrimaryAccountNumber);
-            pairs.Add("PrimaryAccountDateOfBirth", paymentSenseRequestDto.PrimaryAccountDateOfBirth);
-            pairs.Add("PrimaryAccountPostCode", paymentSenseRequestDto.PrimaryAccountPostCode);
+            Dictionary<string, object> pairs = new Dictionary<string, object> {{"PreSharedKey", preSharedKey}};
+            pairs.Add(formValues, "MerchantID");
+            pairs.Add("Password", password);
+            pairs.Add(formValues, "Amount");
+            pairs.Add(formValues, "CurrencyCode");
+            pairs.AddIfExists(formValues, "EchoAVSCheckResult");
+            pairs.AddIfExists(formValues, "EchoCV2CheckResult");
+            pairs.AddIfExists(formValues, "EchoThreeDSecureAuthenticationCheckResult");
+            pairs.AddIfExists(formValues, "EchoCardType");
+            pairs.AddIfExists(formValues, "EchoCardNumberFirstSix");
+            pairs.AddIfExists(formValues, "EchoCardNumberLastFour");
+            pairs.AddIfExists(formValues, "EchoCardExpiryDate");
+            pairs.AddIfExists(formValues, "EchoDonationAmount");
+            pairs.AddIfExists(formValues, "AVSOverridePolicy");
+            pairs.AddIfExists(formValues, "CV2OverridePolicy");
+            pairs.AddIfExists(formValues, "ThreeDSecureOverridePolicy");
+            pairs.AddIfExists(formValues, "OrderID");
+            pairs.Add(formValues, "TransactionType");
+            pairs.Add(formValues, "TransactionDateTime");
+            pairs.Add(formValues, "CallbackURL");
+            pairs.AddIfExists(formValues, "OrderDescription");
+            pairs.AddIfExists(formValues, "CustomerName");
+            pairs.AddIfExists(formValues, "Address1");
+            pairs.AddIfExists(formValues, "Address2");
+            pairs.AddIfExists(formValues, "Address3");
+            pairs.AddIfExists(formValues, "Address4");
+            pairs.AddIfExists(formValues, "City");
+            pairs.AddIfExists(formValues, "State");
+            pairs.AddIfExists(formValues, "PostCode");
+            pairs.AddIfExists(formValues, "CountryCode");
+            pairs.AddIfExists(formValues, "EmailAddress");
+            pairs.AddIfExists(formValues, "PhoneNumber");
+            pairs.AddIfExists(formValues, "DateOfBirth");
+            pairs.AddIfExists(formValues, "EmailAddressEditable");
+            pairs.AddIfExists(formValues, "PhoneNumberEditable");
+            pairs.AddIfExists(formValues, "DateOfBirthEditable");
+            pairs.AddIfExists(formValues, "CV2Mandatory");
+            pairs.AddIfExists(formValues, "Address1Mandatory");
+            pairs.AddIfExists(formValues, "CityMandatory");
+            pairs.AddIfExists(formValues, "PostCodeMandatory");
+            pairs.AddIfExists(formValues, "StateMandatory");
+            pairs.AddIfExists(formValues, "CountryMandatory");
+            pairs.AddIfExists(formValues, "ResultDeliveryMethod");
+            pairs.AddIfExists(formValues, "ServerResultURL");
+            pairs.AddIfExists(formValues, "PaymentFormDisplaysResult");
+            pairs.AddIfExists(formValues, "PrimaryAccountName");
+            pairs.AddIfExists(formValues, "PrimaryAccountNumber");
+            pairs.AddIfExists(formValues, "PrimaryAccountDateOfBirth");
+            pairs.AddIfExists(formValues, "PrimaryAccountPostCode");
 
             return string.Join("&", pairs.Select(x => $"{x.Key}={x.Value.ToString()}"));
         }
@@ -87,6 +86,25 @@ namespace WArcherButchers.ServerApp.PaymentSense
             }
 
             return (sbStringBuilder.ToString());
+        }
+    }
+
+    public static class DictionaryExistions
+    {
+        public static void AddIfExists(this Dictionary<string, object> to, Dictionary<string, object> from, string key)
+        {
+            if (from.TryGetValue(key, out object value)) to.Add(key, value);
+        }
+        public static void Add(this Dictionary<string, object> to, Dictionary<string, object> from, string key)
+        {
+            if (from.TryGetValue(key, out object value))
+            {
+                to.Add(key, value);
+            }
+            else
+            {
+                throw new ArgumentException($"{key} should exist in dictionary");
+            }
         }
     }
 }

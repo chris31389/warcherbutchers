@@ -14,11 +14,11 @@ import {
     DownloadService,
     AuthService,
     AuthConfig,
-    ApprovalSettings,
+    ServerSettings,
     Auth0Factory
     } from "./";
 
-declare var approvals: ApprovalSettings;
+declare var server: ServerSettings;
 declare var auth0Configuration: AuthConfig;
 
 @NgModule({
@@ -37,7 +37,7 @@ declare var auth0Configuration: AuthConfig;
             deps: [Http, RequestOptions]
         },
         { provide: "ORIGIN_URL", useValue: location.origin + "/" },
-        { provide: "APPROVALS_URL", useValue: approvals.url + "/" }
+        { provide: "SERVER_URL", useValue: server.url + "/" }
     ]
 })
 export class CoreModule {

@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace WArcherButchers.ServerApp.PaymentSense
 {
     public class HashDigestFactory
     {
-        /*public string Create(PaymentSenseRequestDto paymentSenseRequestDto)
+        public string Create(Dictionary<string, object> formValues, string preSharedKey, string password)
         {
-            string stringToHash = GetStringToHash(paymentSenseRequestDto);
+            string stringToHash = GetStringToHash(formValues, preSharedKey, password);
             byte[] body = StringToByteArray(stringToHash);
             SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider();
             byte[] hashDigest = sha1.ComputeHash(body);
             return ByteArrayToHexString(hashDigest);
         }
-*/
+
         public static string GetStringToHash(Dictionary<string,object> formValues, string preSharedKey, string password)
         {
-            Dictionary<string, object> pairs = new Dictionary<string, object> {{"PreSharedKey", preSharedKey}};
+            Dictionary<string, object> pairs = new Dictionary<string, object>();
+            pairs.Add("PreSharedKey", preSharedKey);
             pairs.Add(formValues, "MerchantID");
             pairs.Add("Password", password);
             pairs.Add(formValues, "Amount");
@@ -35,9 +37,9 @@ namespace WArcherButchers.ServerApp.PaymentSense
             pairs.AddIfExists(formValues, "CV2OverridePolicy");
             pairs.AddIfExists(formValues, "ThreeDSecureOverridePolicy");
             pairs.AddIfExists(formValues, "OrderID");
-            pairs.Add(formValues, "TransactionType");
-            pairs.Add(formValues, "TransactionDateTime");
-            pairs.Add(formValues, "CallbackURL");
+            pairs.AddIfExists(formValues, "TransactionType");
+            pairs.AddIfExists(formValues, "TransactionDateTime");
+            pairs.AddIfExists(formValues, "CallbackURL");
             pairs.AddIfExists(formValues, "OrderDescription");
             pairs.AddIfExists(formValues, "CustomerName");
             pairs.AddIfExists(formValues, "Address1");

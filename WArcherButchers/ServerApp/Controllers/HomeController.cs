@@ -7,24 +7,21 @@ namespace WArcherButchers.ServerApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IOptions<ApprovalsSettings> _approvalSettingsOptions;
         private readonly IOptions<Auth0Settings> _auth0SettingsOptions;
-        private readonly IOptions<WebServerSettings> _serverSettingsOptions;
+        private readonly IOptions<ServerSettings> _serverSettingsOptions;
 
         public HomeController(
-            IOptions<ApprovalsSettings> approvalSettingsOptions,
             IOptions<Auth0Settings> auth0SettingsOptions,
-            IOptions<WebServerSettings> serverSettingsOptions)
+            IOptions<ServerSettings> serverSettingsOptions)
         {
-            _approvalSettingsOptions = approvalSettingsOptions;
             _auth0SettingsOptions = auth0SettingsOptions;
             _serverSettingsOptions = serverSettingsOptions;
         }
 
         public IActionResult Index()
         {
-            ViewData["Approvals.Url"] = _approvalSettingsOptions.Value.Url;
-            ViewData["Auth0.ApiUrl"] = _approvalSettingsOptions.Value.Url;
+            ViewData["Server.Url"] = _serverSettingsOptions.Value.Url;
+            ViewData["Auth0.ApiUrl"] = _serverSettingsOptions.Value.Url;
             ViewData["Auth0.CallbackUrl"] = $"{_serverSettingsOptions.Value.Url.Trim('/')}/callback";
             ViewData["Auth0.Domain"] = _auth0SettingsOptions.Value.Domain;
             ViewData["Auth0.ClientId"] = _auth0SettingsOptions.Value.ClientId;

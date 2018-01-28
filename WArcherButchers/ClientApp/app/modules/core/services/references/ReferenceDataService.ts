@@ -12,7 +12,7 @@ export class ReferenceDataService {
 
     constructor(
         private readonly authHttp: AuthHttp,
-        @Inject("APPROVALS_URL") private readonly approvalsUrl: string,
+        @Inject("SERVER_URL") private readonly approvalsUrl: string,
         private readonly errorService: ErrorService
     ) {
     }

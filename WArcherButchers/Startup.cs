@@ -20,9 +20,8 @@ namespace WArcherButchers
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.Configure<ApprovalsSettings>(Configuration.GetSection("Approvals"));
             services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
-            services.Configure<WebServerSettings>(Configuration.GetSection("Server"));
+            services.Configure<ServerSettings>(Configuration.GetSection("Server"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

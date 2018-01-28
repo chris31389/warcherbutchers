@@ -21,7 +21,7 @@ export class AuthService {
         public router: Router,
         @Inject("Auth0Config") private authConfig: AuthConfig.AuthConfig,
         private authHttp: AuthHttp,
-        @Inject("APPROVALS_URL") private approvalsUrl: string,
+        @Inject("SERVER_URL") private approvalsUrl: string,
         private errorService: ErrorService
     ) {
         this.auth0 = new auth0.WebAuth({

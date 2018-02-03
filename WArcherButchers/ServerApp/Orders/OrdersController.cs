@@ -27,7 +27,7 @@ namespace WArcherButchers.ServerApp.Orders
         }
 
         [HttpGet("{orderId:guid}/form")]
-        public async Task<IActionResult> GetFormDetails(
+        public IActionResult GetFormDetails(
             Guid orderId,
             string callbackUrl)
         {

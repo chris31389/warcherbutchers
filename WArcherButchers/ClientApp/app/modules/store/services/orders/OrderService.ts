@@ -1,5 +1,7 @@
 ﻿// import {  } from "./";
 
+import { ProductSelection } from "../";
+
 export class OrderService {
     private updateStorage(selection: Array<ProductSelection>): void {
         const mappedSelection = selection.map(productSelection => {

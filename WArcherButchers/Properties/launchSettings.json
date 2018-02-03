@@ -18,6 +18,7 @@
     "WArcherButchers": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "http://localhost:50975/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

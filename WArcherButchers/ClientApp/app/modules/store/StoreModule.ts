@@ -5,6 +5,7 @@ import { SharedModule } from "../shared";
 import {
     CategoryService,
     ProductService,
+    OrderService,
     BasketService
     } from "./";
 
@@ -29,6 +30,7 @@ import {
     providers: [
         CategoryService,
         ProductService,
+        OrderService,
         BasketService
     ],
     declarations: [

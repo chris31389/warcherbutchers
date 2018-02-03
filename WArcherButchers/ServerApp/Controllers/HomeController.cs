@@ -21,6 +21,7 @@ namespace WArcherButchers.ServerApp.Controllers
         public IActionResult Index()
         {
             ViewData["Server.Url"] = _serverSettingsOptions.Value.Url;
+            ViewData["Client.Url"] = _serverSettingsOptions.Value.Url;
             ViewData["Auth0.ApiUrl"] = _serverSettingsOptions.Value.Url;
             ViewData["Auth0.CallbackUrl"] = $"{_serverSettingsOptions.Value.Url.Trim('/')}/callback";
             ViewData["Auth0.Domain"] = _auth0SettingsOptions.Value.Domain;

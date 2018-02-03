@@ -228,7 +228,7 @@
             <div [hidden]="postCode.valid || postCode.pristine" class="alert alert-danger">
                 <div [hidden]="!postCode.hasError('required')">Post Code is required</div>
             </div>
-            <button type="submit" class="btn btn-success btn-block" [disabled]="!deliveryForm.form.valid">
+            <button type="submit" class="btn btn-success btn-block" [disabled]="!deliveryForm.form.valid || submitClicked">
                 <span [innerHtml]="payBtn"></span>
             </button>
         </form>

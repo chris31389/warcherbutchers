@@ -1,5 +1,6 @@
 ﻿import { Injectable, Inject } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Observable } from "rxjs/Rx";
 
 import { ProductSelection, CustomerData } from "../";
 import { OrderProduct } from "./";
@@ -26,20 +27,15 @@ export class OrderService {
         localStorage.setItem("basketItems", json);
     }
 
-    submitOrder(customerData: CustomerData, productsSelected: Array<ProductSelection>): string {
+    submitOrder(customerData: CustomerData, productsSelected: Array<ProductSelection>): Observable<any> {
         const orderProducts =
             productsSelected.map(x => new OrderProduct(x.quantity, x.product.id, x.product.variationId));
 
-        this.http.post(`${this.serverUrl}/api/v1/orders`,
-                {
-                    body: {
-                        callbackUrl: `${this.clientUrl}/order/{orderId}`,
-                        customerData: customerData,
-                        orderProducts: orderProducts
-                    }
-                })
-            .subscribe(x => console.log(x));
-
-        return "";
+        return this.http.post(`${this.serverUrl}/api/v1/orders`,
+            {
+                callbackUrl: `${this.clientUrl}/order/{orderId}`,
+                customerData: customerData,
+                orderProducts: orderProducts
+            });
     }
 }

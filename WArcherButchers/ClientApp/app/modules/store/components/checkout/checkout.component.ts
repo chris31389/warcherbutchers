@@ -34,6 +34,8 @@ export class CheckoutComponent {
 
     submitForm = () => {
         this.submitClicked = true;
-        this.orderService.submitOrder(this.customerData, this.basket.items);
+        this.orderService
+            .submitOrder(this.customerData, this.basket.items)
+            .subscribe(x => console.log(x));
     };
 }

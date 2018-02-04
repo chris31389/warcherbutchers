@@ -14,10 +14,12 @@ namespace WArcherButchers.ServerApp.Orders
     public class OrdersController : Controller
     {
         private readonly string _serverUrl;
+        private HashDigestFactory _hashDigestFactory;
 
         public OrdersController(IOptions<ServerSettings> serverSettings)
         {
             _serverUrl = serverSettings.Value.Url;
+            _hashDigestFactory = new HashDigestFactory();
         }
 
         [HttpPost("")]
@@ -60,28 +62,44 @@ namespace WArcherButchers.ServerApp.Orders
             Dictionary<string, object> formValues = new Dictionary<string, object>
             {
                 {"MerchantID", "Test-2994724"},
-                {"Amount", 100},
+                {"Amount", 1359},
                 {"CurrencyCode", 826},
+                {"EchoAVSCheckResult", false},
+                {"EchoCV2CheckResult", false},
+                {"EchoThreeDSecureAuthenticationCheckResult", false},
+                {"EchoCardType", false},
+                {"AVSOverridePolicy", "EFFF"},
+                {"CV2OverridePolicy", "FF"},
+                {"ThreeDSecureOverridePolicy", false},
+                {"OrderID", orderId.ToString()},
                 {"TransactionType", "SALE"},
-                {"PaymentProcessorDomain", "paymentsensegateway.com"},
-                {"HashMethod", "SHA1"},
-                {"ResultDeliveryMethod", "POST"},
+                {"TransactionDateTime", DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss zzz")},
+                {"CallbackURL", callbackUrl},
                 {"OrderDescription", "Sale of Chilled Meat Products"},
+                {"CustomerName", ""},
+                {"Address1", ""},
+                {"Address2", ""},
+                {"Address3", ""},
+                {"Address4", ""},
+                {"City", ""},
+                {"State", ""},
+                {"PostCode", ""},
+                {"CountryCode", ""},
+                {"EmailAddress", ""},
+                {"PhoneNumber", ""},
+                {"EmailAddressEditable", false},
+                {"PhoneNumberEditable", false},
                 {"CV2Mandatory", true},
                 {"Address1Mandatory", true},
                 {"CityMandatory", true},
                 {"PostCodeMandatory", true},
                 {"StateMandatory", true},
                 {"CountryMandatory", true},
-                {"PaymentFormDisplaysResult", false},
-                {"AVSOverridePolicy", "EFFF"},
-                {"CV2OverridePolicy", "FF"},
-                {"TransactionDateTime", DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss zzz")},
+                {"ResultDeliveryMethod", "SERVER"},
                 {"ServerResultURL", $"{_serverUrl}/confirmpayment"},
-                {"OrderID", orderId.ToString()},
-                {"CallbackURL", callbackUrl}
+                {"PaymentFormDisplaysResult", false}
             };
-            string stringToHash = HashDigestFactory.GetStringToHash(formValues,
+            string stringToHash = _hashDigestFactory.Create(formValues,
                 "WwUbLs5oGMQqZVVHvw4XgxMefcWE2TXfW5zEUP/tzIqf+iBm5iUn85+sBkTeK3NFfrjVmzRHqTkR91oOesJR",
                 "1q2aW3zSe4");
             Dictionary<string,

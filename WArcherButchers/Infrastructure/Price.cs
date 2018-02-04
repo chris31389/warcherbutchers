@@ -9,5 +9,7 @@
         }
 
         public int Major, Minor;
+
+        public int ToInt() => Major * 100 + Minor;
     }
 }

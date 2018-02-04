@@ -25,11 +25,10 @@ namespace WArcherButchers.ServerApp.Orders
         [HttpPost("")]
         public async Task<IActionResult> Create([FromBody] CreateOrderDto createOrderDto)
         {
-            Price price = await CalculateTotal(createOrderDto.OrderSelections);
             OrderDto orderDto =
-                await CreateOrderAsync(createOrderDto.CustomerData, createOrderDto.OrderSelections, price);
+                await CreateOrderAsync(createOrderDto);
             string callbackUrl = createOrderDto.CallbackUrl.Replace("{orderId}", orderDto.Id.ToString());
-            IEnumerable<FormElementDto> formDetails = GetFormDetails(orderDto.Id, callbackUrl)
+            IEnumerable<FormElementDto> formDetails = GetFormDetails(orderDto, createOrderDto.CustomerData, callbackUrl)
                 .Select(x => new FormElementDto
                 {
                     Key = x.Key,
@@ -39,12 +38,14 @@ namespace WArcherButchers.ServerApp.Orders
             return Ok(formDetails);
         }
 
-        private async Task<OrderDto> CreateOrderAsync(CustomerDataDto createOrderDto,
-            IEnumerable<OrderSelectionDto> orderSelection, Price price)
+        private async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto)
         {
-            await Task.Delay(1);
-            OrderDto orderDto = new OrderDto();
-            orderDto.Id = Guid.NewGuid();
+            Price price = await CalculateTotal(createOrderDto.OrderSelections);
+            OrderDto orderDto = new OrderDto
+            {
+                Id = Guid.NewGuid(),
+                Price = price
+            };
             return orderDto;
         }
 
@@ -55,14 +56,14 @@ namespace WArcherButchers.ServerApp.Orders
             return totalCost;
         }
 
-        private Dictionary<string, object> GetFormDetails(
-            Guid orderId,
+        private Dictionary<string, object> GetFormDetails(OrderDto order,
+            CustomerDataDto customerData,
             string callbackUrl)
         {
             Dictionary<string, object> formValues = new Dictionary<string, object>
             {
                 {"MerchantID", "Test-2994724"},
-                {"Amount", 1359},
+                {"Amount", order.Price.ToInt()},
                 {"CurrencyCode", 826},
                 {"EchoAVSCheckResult", false},
                 {"EchoCV2CheckResult", false},
@@ -71,12 +72,12 @@ namespace WArcherButchers.ServerApp.Orders
                 {"AVSOverridePolicy", "EFFF"},
                 {"CV2OverridePolicy", "FF"},
                 {"ThreeDSecureOverridePolicy", false},
-                {"OrderID", orderId.ToString()},
+                {"OrderID", order.Id.ToString()},
                 {"TransactionType", "SALE"},
                 {"TransactionDateTime", DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss zzz")},
                 {"CallbackURL", callbackUrl},
                 {"OrderDescription", "Sale of Chilled Meat Products"},
-                {"CustomerName", ""},
+                {"CustomerName", customerData.Name},
                 {"Address1", ""},
                 {"Address2", ""},
                 {"Address3", ""},
@@ -85,8 +86,8 @@ namespace WArcherButchers.ServerApp.Orders
                 {"State", ""},
                 {"PostCode", ""},
                 {"CountryCode", ""},
-                {"EmailAddress", ""},
-                {"PhoneNumber", ""},
+                {"EmailAddress", customerData.EmailAddress},
+                {"PhoneNumber", customerData.PhoneNumber},
                 {"EmailAddressEditable", false},
                 {"PhoneNumberEditable", false},
                 {"CV2Mandatory", true},
@@ -96,7 +97,7 @@ namespace WArcherButchers.ServerApp.Orders
                 {"StateMandatory", true},
                 {"CountryMandatory", true},
                 {"ResultDeliveryMethod", "SERVER"},
-                {"ServerResultURL", $"{_serverUrl}/confirmpayment"},
+                {"ServerResultURL", $"{_serverUrl}/confirm-payment"},
                 {"PaymentFormDisplaysResult", false}
             };
             string stringToHash = _hashDigestFactory.Create(formValues,

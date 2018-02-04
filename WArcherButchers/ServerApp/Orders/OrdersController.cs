@@ -33,12 +33,8 @@ namespace WArcherButchers.ServerApp.Orders
                     Key = x.Key,
                     Value = x.Value
                 });
-            CreateOrderOutDto createOrderOutDto = new CreateOrderOutDto
-            {
-                Order = orderDto,
-                FormDetails = formDetails
-            };
-            return Ok(createOrderOutDto);
+            
+            return Ok(formDetails);
         }
 
         private async Task<OrderDto> CreateOrderAsync(CustomerDataDto createOrderDto,
@@ -80,6 +76,7 @@ namespace WArcherButchers.ServerApp.Orders
                 {"PaymentFormDisplaysResult", false},
                 {"AVSOverridePolicy", "EFFF"},
                 {"CV2OverridePolicy", "FF"},
+                {"TransactionDateTime", DateTimeOffset.Now.ToString("yyyy-MM-dd HH:mm:ss zzz")},
                 {"ServerResultURL", $"{_serverUrl}/confirmpayment"},
                 {"OrderID", orderId.ToString()},
                 {"CallbackURL", callbackUrl}

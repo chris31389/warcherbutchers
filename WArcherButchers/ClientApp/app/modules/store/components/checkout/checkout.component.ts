@@ -1,6 +1,6 @@
 ﻿import { Component, Input } from "@angular/core";
 import {
-    Product,
+    FormElement,
     CustomerData,
     Basket,
     CategoryService,
@@ -18,6 +18,7 @@ import {
 export class CheckoutComponent {
     basket: Basket;
     customerData = new CustomerData();
+    paymentSenseUrl = "https://mms.paymentsensegateway.com/Pages/PublicPages/PaymentForm.aspx";
     title = "Checkout";
     yourDetails = "Your Details";
     payBtn = "Continue to Payment";
@@ -36,6 +37,31 @@ export class CheckoutComponent {
         this.submitClicked = true;
         this.orderService
             .submitOrder(this.customerData, this.basket.items)
-            .subscribe(x => console.log(x));
+            .subscribe(formElements => {
+                console.log(formElements);
+                this.createFormAndSubmit(formElements);
+            });
     };
+
+    createFormAndSubmit = (formElements: Array<FormElement>) => {
+
+        var myForm = document.createElement("FORM") as HTMLFormElement;
+
+        myForm.name = "myForm";
+        myForm.method = "POST";
+        myForm.action = this.paymentSenseUrl;
+
+        formElements.forEach(element => {
+            // var value = element.value !== undefined ? element.value : "";
+            var myInput = document.createElement("INPUT") as HTMLFormElement;
+            myInput.type = "HIDDEN";
+            myInput.name = element.key;
+            myInput.value = element.value;
+            myForm.appendChild(myInput);
+        });
+
+        document.body.appendChild(myForm);
+        myForm.submit();
+
+    }
 }

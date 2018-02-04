@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 
 import { ProductSelection, CustomerData } from "../";
-import { OrderProduct } from "./";
+import { OrderProduct, FormElement } from "./";
 
 @Injectable()
 export class OrderService {
@@ -27,11 +27,11 @@ export class OrderService {
         localStorage.setItem("basketItems", json);
     }
 
-    submitOrder(customerData: CustomerData, productsSelected: Array<ProductSelection>): Observable<any> {
+    submitOrder(customerData: CustomerData, productsSelected: Array<ProductSelection>): Observable<Array<FormElement>> {
         const orderProducts =
             productsSelected.map(x => new OrderProduct(x.quantity, x.product.id, x.product.variationId));
 
-        return this.http.post(`${this.serverUrl}/api/v1/orders`,
+        return this.http.post<Array<FormElement>>(`${this.serverUrl}/api/v1/orders`,
             {
                 callbackUrl: `${this.clientUrl}/order/{orderId}`,
                 customerData: customerData,

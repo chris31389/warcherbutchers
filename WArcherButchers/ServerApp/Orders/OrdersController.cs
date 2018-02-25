@@ -14,7 +14,7 @@ namespace WArcherButchers.ServerApp.Orders
     public class OrdersController : Controller
     {
         private readonly string _serverUrl;
-        private HashDigestFactory _hashDigestFactory;
+        private readonly HashDigestFactory _hashDigestFactory;
 
         public OrdersController(IOptions<ServerSettings> serverSettings)
         {
@@ -23,13 +23,13 @@ namespace WArcherButchers.ServerApp.Orders
         }
 
         [HttpPost("")]
-        public async Task<IActionResult> Create([FromBody] CreateOrderDto createOrderDto)
+        public async Task<IActionResult> Create([FromBody] CreateOrderModel createOrderModel)
         {
-            OrderDto orderDto =
-                await CreateOrderAsync(createOrderDto);
-            string callbackUrl = createOrderDto.CallbackUrl.Replace("{orderId}", orderDto.Id.ToString());
-            IEnumerable<FormElementDto> formDetails = GetFormDetails(orderDto, createOrderDto.CustomerData, callbackUrl)
-                .Select(x => new FormElementDto
+            OrderModel orderModel =
+                await CreateOrderAsync(createOrderModel);
+            string callbackUrl = createOrderModel.CallbackUrl.Replace("{orderId}", orderModel.Id.ToString());
+            IEnumerable<FormElementModel> formDetails = GetFormDetails(orderModel, createOrderModel.CustomerData, callbackUrl)
+                .Select(x => new FormElementModel
                 {
                     Key = x.Key,
                     Value = x.Value
@@ -38,26 +38,26 @@ namespace WArcherButchers.ServerApp.Orders
             return Ok(formDetails);
         }
 
-        private async Task<OrderDto> CreateOrderAsync(CreateOrderDto createOrderDto)
+        private static async Task<OrderModel> CreateOrderAsync(CreateOrderModel createOrderModel)
         {
-            Price price = await CalculateTotal(createOrderDto.OrderSelections);
-            OrderDto orderDto = new OrderDto
+            Price price = await CalculateTotal(createOrderModel.OrderSelections);
+            OrderModel orderModel = new OrderModel
             {
                 Id = Guid.NewGuid(),
                 Price = price
             };
-            return orderDto;
+            return orderModel;
         }
 
-        private async Task<Price> CalculateTotal(IEnumerable<OrderSelectionDto> productSelection)
+        private static async Task<Price> CalculateTotal(IEnumerable<OrderSelectionModel> productSelection)
         {
             await Task.Delay(1);
             Price totalCost = new Price(15, 30);
             return totalCost;
         }
 
-        private Dictionary<string, object> GetFormDetails(OrderDto order,
-            CustomerDataDto customerData,
+        private Dictionary<string, object> GetFormDetails(OrderModel order,
+            CustomerDataModel customerData,
             string callbackUrl)
         {
             Dictionary<string, object> formValues = new Dictionary<string, object>
@@ -97,7 +97,7 @@ namespace WArcherButchers.ServerApp.Orders
                 {"StateMandatory", true},
                 {"CountryMandatory", true},
                 {"ResultDeliveryMethod", "SERVER"},
-                {"ServerResultURL", $"{_serverUrl}/confirm-payment"},
+                {"ServerResultURL", $"{_serverUrl}/api/v1/confirm-payment"},
                 {"PaymentFormDisplaysResult", false}
             };
             string stringToHash = _hashDigestFactory.Create(formValues,

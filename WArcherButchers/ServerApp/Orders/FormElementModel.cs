@@ -1,6 +1,6 @@
 ﻿namespace WArcherButchers.ServerApp.Orders
 {
-    public class FormElementDto
+    public class FormElementModel
     {
         public string Key { get; set; }
         public object Value { get; set; }

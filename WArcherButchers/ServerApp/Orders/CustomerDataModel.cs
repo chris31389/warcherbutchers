@@ -1,6 +1,6 @@
 ﻿namespace WArcherButchers.ServerApp.Orders
 {
-    public class CustomerDataDto
+    public class CustomerDataModel
     {
         public string Name { get; set; }
         public string EmailAddress { get; set; }

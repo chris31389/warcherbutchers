@@ -2,7 +2,7 @@
 
 namespace WArcherButchers.ServerApp.PaymentSense
 {
-    public class PaymentSenseRequestDto
+    public class PaymentSenseRequestModel
     {
         public string PreSharedKey { get; set; }
         public string MerchantID { get; set; }

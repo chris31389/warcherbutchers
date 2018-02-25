@@ -1,11 +1,12 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WArcherButchers.ServerApp.Controllers
+namespace WArcherButchers.ServerApp.Products
 {
-    public class ProductController : Controller
+    [Route("api/v1/[controller]")]
+    public class ProductsController : Controller
     {
-        // GET
+        [HttpGet("")]
         public async Task<IActionResult> GetSingle()
         {
             await Task.Delay(1);

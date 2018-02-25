@@ -8,7 +8,8 @@
             Minor = minor;
         }
 
-        public int Major, Minor;
+        public readonly int Major;
+        public readonly int Minor;
 
         public int ToInt() => Major * 100 + Minor;
     }

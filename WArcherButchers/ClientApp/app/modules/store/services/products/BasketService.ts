@@ -1,11 +1,13 @@
 ﻿import { Basket, ProductSelection, ProductService, DeliveryInfo } from "./";
+import { Injectable, Inject } from "@angular/core";
 
+@Injectable()
 export class BasketService {
     basket = null;
 
     constructor(
+        private readonly productService: ProductService
     ) {
-        const productService = new ProductService();
         const basketItems = new Array<ProductSelection>();
         const deliveryInfo = new DeliveryInfo();
 

@@ -1,5 +1,4 @@
-﻿import {Variation} from "./";
-import { Price} from "../../../shared";
+﻿import { Price} from "../../../shared";
 
 export class Product {
     id: string;

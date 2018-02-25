@@ -6,6 +6,6 @@ namespace WArcherButchers.ServerApp.Products
     public class Weight
     {
         public string Unit { get; set; }
-        public double Value { get; set; }
+        public decimal Value { get; set; }
     }
 }

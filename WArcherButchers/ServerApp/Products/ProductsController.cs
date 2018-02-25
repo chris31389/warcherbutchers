@@ -1,12 +1,19 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WArcherButchers.Infrastructure;
+using WArcherButchers.ServerApp.Infrastructure;
 
 namespace WArcherButchers.ServerApp.Products
 {
     [Route("api/v1/[controller]")]
     public class ProductsController : Controller
     {
+        private readonly IRepository<Product> _productRepository;
+
+        public ProductsController(IRepository<Product> productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
         [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
@@ -25,8 +32,8 @@ namespace WArcherButchers.ServerApp.Products
         public async Task<IActionResult> GetRandom()
         {
             await Task.Delay(1);
-            ProductModel productModel = CreateProductModel();
-            return Ok(productModel);
+            ProductModel product = CreateProductModel();
+            return Ok(product);
         }
 
         private static ProductModel CreateProductModel() => new ProductModel
@@ -38,7 +45,7 @@ namespace WArcherButchers.ServerApp.Products
             Categories = new []{"Beef", "Bulk"},
             VariationId = "55fd309b0a85b0ff7af2d199",
             PricePerKilo = new Price(5,80),
-            Weight = new WeightModel
+            Weight = new Weight
             {
                 Value = 5,
                 Unit = "kg"

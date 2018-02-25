@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WArcherButchers.Infrastructure;
+using WArcherButchers.ServerApp.Infrastructure;
 
 namespace WArcherButchers.ServerApp.Products
 {
@@ -13,10 +13,10 @@ namespace WArcherButchers.ServerApp.Products
         public string ImageId { get; set; }
         public string ImageUrl { get; set; }
         public string VariationId { get; set; }
-        public Price? PricePerKilo { get; set; }
-        public Price? Price { get; set; }
-        public Price? OldPrice { get; set; }
+        public Price PricePerKilo { get; set; }
+        public Price Price { get; set; }
+        public Price OldPrice { get; set; }
         public bool IsSpeciality { get; set; }
-        public WeightModel Weight { get; set; }
+        public Weight Weight { get; set; }
     }
 }

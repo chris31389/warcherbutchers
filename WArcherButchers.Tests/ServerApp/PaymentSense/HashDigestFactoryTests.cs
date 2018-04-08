@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using WArcherButchers.ServerApp.PaymentSense;
 
-namespace WArcherButchers.Tests
+namespace WArcherButchers.Tests.ServerApp.PaymentSense
 {
     [TestFixture]
     public class HashDigestFactoryTests

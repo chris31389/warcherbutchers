@@ -1,20 +1,17 @@
-﻿using WArcherButchers.ServerApp.Infrastructure;
-
-namespace WArcherButchers.ServerApp.Products
+﻿namespace WArcherButchers.ServerApp.Products
 {
     public static class PricePerKiloHelper
     {
-        public static Price CalculatePrice(Weight weight, Price price)
+        public static int CalculatePrice(Weight weight, int price)
         {
             if (weight.Value == 0)
             {
                 return price;
             }
 
-            decimal grams = weight.Unit == "kg" ? weight.Value * 1000 : weight.Value * 1;
-            int priceAsInt = price.ToInt();
-            decimal cost = (priceAsInt * 1000 / grams) / 100;
-            return new Price(cost);
+            decimal grams = weight.Unit == "kg" ? weight.Value * 1000 : weight.Value;
+            decimal cost = price * 1000 / grams;
+            return decimal.ToInt32(cost);
         }
     }
 }

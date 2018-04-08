@@ -1,38 +1,28 @@
-﻿using NUnit.Framework;
-using WArcherButchers.ServerApp.Infrastructure;
+﻿using System;
+using NUnit.Framework;
 using WArcherButchers.ServerApp.Products;
 
-namespace WArcherButchers.Tests
+namespace WArcherButchers.Tests.ServerApp.Products
 {
     [TestFixture]
     public class PricePerKiloHelperTests
     {
-        [TestCase(1, "kg", 5, 0, 5, 0)]
-        [TestCase(1.8, "kg", 10, 0, 5, 55)]
-        [TestCase(1.8, "kg", 18, 0, 10, 0)]
-        [TestCase(500, "g", 5, 50, 11, 0)]
-        [TestCase(500, "g", 5, 30, 10, 60)]
-        [TestCase(500, "g", 5, 0, 10, 0)]
+        [TestCase(1, "kg", 500, 500)]
+        [TestCase(1.8, "kg", 1000, 555)]
+        [TestCase(1.8, "kg", 1800, 1000)]
+        [TestCase(500, "g", 550, 1100)]
+        [TestCase(500, "g", 530, 1060)]
+        [TestCase(500, "g", 500, 1000)]
         public void GivenWeightAndPrice_WhenICalculatePricePerKilo_ThenItGivesMeEpectedPrice(
             decimal weightValue,
             string weightUnit,
-            int priceMajor,
-            int priceMinor,
-            int perKiloPriceMajor,
-            int perKiloPriceMinor
+            int price,
+            int perKiloPrice
             )
         {
-            Weight weight = new Weight
-            {
-                Unit = weightUnit,
-                Value = weightValue
-            };
-
-            Price price = new Price(priceMajor, priceMinor);
-            Price total = PricePerKiloHelper.CalculatePrice(weight, price);
-
-            Assert.That(total.Major, Is.EqualTo(perKiloPriceMajor));
-            Assert.That(total.Minor, Is.EqualTo(perKiloPriceMinor));
+            Weight weight = new Weight(Guid.Empty, weightUnit, weightValue);
+            int total = PricePerKiloHelper.CalculatePrice(weight, price);
+            Assert.That(total, Is.EqualTo(perKiloPrice));
         }
     }
 }

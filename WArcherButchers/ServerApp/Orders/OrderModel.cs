@@ -1,5 +1,4 @@
 ﻿using System;
-using WArcherButchers.Infrastructure;
 using WArcherButchers.ServerApp.Infrastructure;
 
 namespace WArcherButchers.ServerApp.Orders

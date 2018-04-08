@@ -49,15 +49,15 @@ namespace WArcherButchers.ServerApp.Products
                 return new ProductModel
                 {
                     Id = product.Id.ToString(),
-                    Categories = product.Categories,
+                    Categories = product.Categories.Select(x => x.Name),
                     Description = product.Description,
                     DetailedDescription = product.DetailedDescription,
                     ImageId = variation.ImageId,
                     ImageUrl = variation.ImageUrl,
                     IsSpeciality = product.Speciality,
                     Name = $"{product.Name} ({variationName})",
-                    Price = variation.Price,
-                    PricePerKilo = PricePerKiloHelper.CalculatePrice(variation.Weight, variation.Price),
+                    Price = new Price(variation.Price),
+                    PricePerKilo = new Price(PricePerKiloHelper.CalculatePrice(variation.Weight, variation.Price)),
                     Weight = variation.Weight,
                     VariationId = variation.Id.ToString()
                 };

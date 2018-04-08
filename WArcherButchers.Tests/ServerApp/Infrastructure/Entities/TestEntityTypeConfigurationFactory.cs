@@ -7,7 +7,7 @@ namespace WArcherButchers.Tests.ServerApp.Infrastructure.Entities
     {
         public void Initialize(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new TestPersistenceEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TestEntityTypeConfiguration());
         }
     }
 }

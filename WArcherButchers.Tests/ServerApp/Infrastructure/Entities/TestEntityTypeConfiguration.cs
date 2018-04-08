@@ -2,7 +2,7 @@
 
 namespace WArcherButchers.Tests.ServerApp.Infrastructure.Entities
 {
-    public class TestPersistenceEntityTypeConfiguration : EntityTypeConfiguration<TestEntity>
+    public class TestEntityTypeConfiguration : EntityTypeConfiguration<TestEntity>
     {
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using WArcherButchers.Infrastructure;
 using WArcherButchers.Infrastructure.Settings;
 using WArcherButchers.ServerApp.Infrastructure;
 using WArcherButchers.ServerApp.PaymentSense;
@@ -53,7 +52,7 @@ namespace WArcherButchers.ServerApp.Orders
         private static async Task<Price> CalculateTotal(IEnumerable<OrderSelectionModel> productSelection)
         {
             await Task.Delay(1);
-            Price totalCost = new Price(15, 30);
+            Price totalCost = new Price(1530);
             return totalCost;
         }
 

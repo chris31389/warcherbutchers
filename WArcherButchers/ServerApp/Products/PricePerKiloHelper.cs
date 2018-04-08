@@ -1,7 +1,6 @@
-﻿using System;
-using WArcherButchers.ServerApp.Products;
+﻿using WArcherButchers.ServerApp.Infrastructure;
 
-namespace WArcherButchers.ServerApp.Infrastructure
+namespace WArcherButchers.ServerApp.Products
 {
     public static class PricePerKiloHelper
     {

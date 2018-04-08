@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MongoDB.Driver;
-using WArcherButchers.ServerApp.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using WArcherButchers.ServerApp.Infrastructure.Data.Repositories;
 
 namespace WArcherButchers.ServerApp.Products
 {
     public class ProductRepository : Repository<Product>, IProductRepository
     {
-        public ProductRepository(
-            IMongoClient client,
-            IBsonClassMapper<Product> bsonClassMapper
-        ) : base(client, bsonClassMapper)
+        public ProductRepository(DbContext dbContext) : base(dbContext)
         {
         }
 
-        protected override string CollectionName => "products";
-
         public async Task<Product> GetRandom()
         {
-            IEnumerable<Product> products = await GetAll();
-            Product product = products
+            Product product = await CollectionQuery
                 .OrderBy(x => Guid.NewGuid())
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return product;
         }

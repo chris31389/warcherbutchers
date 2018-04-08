@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using WArcherButchers.ServerApp.Infrastructure;
 
-namespace WArcherButchers.Tests
+namespace WArcherButchers.Tests.ServerApp.Infrastructure
 {
     [TestFixture]
     public class PriceTests

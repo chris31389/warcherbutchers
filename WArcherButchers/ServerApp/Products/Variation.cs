@@ -1,15 +1,12 @@
 ﻿using System;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using WArcherButchers.ServerApp.Infrastructure;
+using WArcherButchers.ServerApp.Infrastructure.Entities;
 
 namespace WArcherButchers.ServerApp.Products
 {
     [Serializable]
-    public class Variation : IEntity
+    public class Variation : SubEntity
     {
-        [BsonId]
-        public ObjectId Id { get; set; }
         public string Name { get; set; }
         public string ImageId { get; set; }
         public string ImageUrl { get; set; }

@@ -10,9 +10,9 @@ namespace WArcherButchers.ServerApp.Products
     [Route("api/v1/[controller]")]
     public class ProductsController : Controller
     {
-        private readonly IRepository<Product> _productRepository;
+        private readonly IProductRepository _productRepository;
 
-        public ProductsController(IRepository<Product> productRepository)
+        public ProductsController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
@@ -20,15 +20,15 @@ namespace WArcherButchers.ServerApp.Products
         [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
-            IEnumerable<Product> products = await _productRepository.GetAll();
+            IEnumerable<Product> products = await _productRepository.GetAllAsync();
             IEnumerable<ProductModel> productModels = products.SelectMany(Map);
             return Ok(productModels);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSingle(string id)
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetSingle(Guid id)
         {
-            Product product = await _productRepository.Get(id);
+            Product product = await _productRepository.GetAsync(id);
             List<ProductModel> productModels = Map(product);
             return Ok(productModels[0]);
         }
@@ -36,11 +36,8 @@ namespace WArcherButchers.ServerApp.Products
         [HttpGet("random")]
         public async Task<IActionResult> GetRandom()
         {
-            IEnumerable<Product> products = await _productRepository.GetAll();
-            List<ProductModel> productModels = products.SelectMany(Map).ToList();
-            Random random = new Random();
-            int randomId = random.Next(productModels.Count);
-            return Ok(productModels[randomId]);
+            Product product = await _productRepository.GetRandom();
+            return Ok(product);
         }
 
         private static List<ProductModel> Map(Product product) => product.Variations

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,40 +20,28 @@ namespace WArcherButchers.ServerApp.Products
         [HttpGet("")]
         public async Task<IActionResult> GetAll()
         {
-            await Task.Delay(1);
-            return Ok();
+            IEnumerable<Product> products = await _productRepository.GetAll();
+            IEnumerable<ProductModel> productModels = products.SelectMany(Map);
+            return Ok(productModels);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetSingle()
+        public async Task<IActionResult> GetSingle(string id)
         {
-            await Task.Delay(1);
-            return Ok();
+            Product product = await _productRepository.Get(id);
+            List<ProductModel> productModels = Map(product);
+            return Ok(productModels[0]);
         }
 
         [HttpGet("random")]
         public async Task<IActionResult> GetRandom()
         {
             IEnumerable<Product> products = await _productRepository.GetAll();
-            ProductModel product = CreateProductModel();
-            return Ok(product);
+            List<ProductModel> productModels = products.SelectMany(Map).ToList();
+            Random random = new Random();
+            int randomId = random.Next(productModels.Count);
+            return Ok(productModels[randomId]);
         }
-
-        private static ProductModel CreateProductModel() => new ProductModel
-        {
-            Id = "55fd2d300a85b0ff7af2d152",
-            Name = "Leicestershire long horn Minced Beef (5kg)",
-            Description = "Makes a tasty Chilli!",
-            ImageId = "55eed9cf672ed712a1b55048",
-            Categories = new[] {"Beef", "Bulk"},
-            VariationId = "55fd309b0a85b0ff7af2d199",
-            PricePerKilo = new Price(5, 80),
-            Weight = new Weight
-            {
-                Value = 5,
-                Unit = "kg"
-            }
-        };
 
         private static List<ProductModel> Map(Product product) => product.Variations
             .Select(variation =>
@@ -71,7 +60,9 @@ namespace WArcherButchers.ServerApp.Products
                     IsSpeciality = product.Speciality,
                     Name = $"{product.Name} ({variationName})",
                     Price = variation.Price,
-                    PricePerKilo = PricePerKiloHelper.CalculatePrice(variation.Weight, variation.Price)
+                    PricePerKilo = PricePerKiloHelper.CalculatePrice(variation.Weight, variation.Price),
+                    Weight = variation.Weight,
+                    VariationId = variation.Id.ToString()
                 };
             }).ToList();
     }

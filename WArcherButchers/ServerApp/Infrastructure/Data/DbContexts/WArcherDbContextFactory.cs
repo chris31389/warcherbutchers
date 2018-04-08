@@ -1,23 +1,30 @@
 ﻿using System;
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using WArcherButchers.ServerApp.Configuration;
 
 namespace WArcherButchers.ServerApp.Infrastructure.Data.DbContexts
 {
-    public class WArcherDbContextFactory : IWArcherDbContextFactory
+    public class WArcherDbContextFactory : IWArcherDbContextFactory, IDesignTimeDbContextFactory<WArcherDbContext>
     {
-        private readonly IDatabaseConnectionStringProvider _databaseConnectionStringProvider;
+        private readonly IDatabase _database;
         private readonly IEntityTypeConfigurationFactory _entityTypeConfigurationFactory;
 
         public WArcherDbContextFactory(
-            IDatabaseConnectionStringProvider databaseConnectionStringProvider,
+            IDatabase database,
             IEntityTypeConfigurationFactory entityTypeConfigurationFactory)
         {
-            _databaseConnectionStringProvider = databaseConnectionStringProvider ??
-                                                throw new ArgumentNullException(
-                                                    nameof(databaseConnectionStringProvider));
+            _database = database ??
+                        throw new ArgumentNullException(
+                            nameof(database));
             _entityTypeConfigurationFactory = entityTypeConfigurationFactory ??
                                               throw new ArgumentNullException(nameof(entityTypeConfigurationFactory));
+        }
+
+        public WArcherDbContextFactory()
+        {
+            _database = new Database();
+            _entityTypeConfigurationFactory = new EntityTypeConfigurationFactory();
         }
 
         public WArcherDbContext CreateDbContext()
@@ -26,12 +33,10 @@ namespace WArcherButchers.ServerApp.Infrastructure.Data.DbContexts
 #if DEBUG
             builder.EnableSensitiveDataLogging();
 #endif
-            string connectionString = _databaseConnectionStringProvider.Get();
-            builder.UseSqlServer(connectionString,
-                optionsBuilder =>
-                    optionsBuilder.MigrationsAssembly(typeof(WArcherDbContext).GetTypeInfo().Assembly.GetName()
-                        .Name));
+            builder.UseSqlServer(_database.ConnectionString);
             return new WArcherDbContext(builder.Options, _entityTypeConfigurationFactory);
         }
+
+        public WArcherDbContext CreateDbContext(string[] args) => CreateDbContext();
     }
 }

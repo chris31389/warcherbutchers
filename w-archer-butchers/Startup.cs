@@ -1,9 +1,12 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using WArcherButchers.Infrastructure.Serialization;
 using WArcherButchers.Infrastructure.Settings;
 using WArcherButchers.ServerApp.Infrastructure.Data.DbContexts;
@@ -27,44 +30,46 @@ namespace WArcherButchers
                 .AddMvc()
                 .AddJsonOptions(options => JsonCustomSerializer.Setup(options.SerializerSettings));
 
-            services.Configure<IConfiguration>(Configuration)
+            services
+                .Configure<IConfiguration>(Configuration)
                 .Configure<Auth0Settings>(Configuration.GetSection("Auth0"))
                 .Configure<ServerSettings>(Configuration.GetSection("Server"))
                 .AddSingleton<IEntityTypeConfigurationFactory, EntityTypeConfigurationFactory>()
-                .AddScoped<DbContext>(s => s.GetService<IWArcherDbContextFactory>().CreateDbContext())
+//                .AddScoped<DbContext>(s => s.GetService<IWArcherDbContextFactory>().CreateDbContext())
                 .AddTypesFromAssembly<EntityTypeConfigurationFactory>("Repository")
                 .And("Mapper")
                 .And("Factory")
                 .And("Query")
-                .And("Service");
+                .And("Service")
+                .ServiceCollection
+                .AddDbContext<WArcherDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("Database")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
             if (env.IsDevelopment())
             {
+                loggerFactory.AddDebug();
                 app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true
-                });
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new {controller = "Home", action = "Index"});
+            app.Run(async (context) =>
+            {
+                context.Response.ContentType = "text/html";
+                await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
             });
         }
     }

@@ -13,6 +13,12 @@ namespace WArcherButchers.ServerApp.Infrastructure.Data.DbContexts
             _entityTypeConfigurationFactory = entityTypeConfigurationFactory;
         }
 
+        public WArcherDbContext(
+            DbContextOptions options) : base(options)
+        {
+            _entityTypeConfigurationFactory = new EntityTypeConfigurationFactory();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

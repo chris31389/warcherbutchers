@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WArcherButchers", "WarcherButchers\WArcherButchers.csproj", "{EC89D2DF-E817-4A24-A6C7-305CFA6D10C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "w-archer-butchers", "w-archer-butchers\WArcherButchers.csproj", "{EC89D2DF-E817-4A24-A6C7-305CFA6D10C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WArcherButchers.Tests", "WArcherButchers.Tests\WArcherButchers.Tests.csproj", "{C20A828E-311E-4481-9241-E27A7657A38B}"
 EndProject

@@ -1,0 +1,25 @@
+﻿<h2 class="section-title">The Store</h2>
+<div class="line"></div>
+<div class="row equal-md">
+    <div class="col-sm-6 col-md-7 col-lg-8">
+        <section id="storeAdvert">
+            <div class="row equal-md">
+                <div class="col-md-6">
+                    <div class="align-block">
+                        <app-product [product]="product"></app-product>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center">
+                    <p class="lead" [innerHtml]="storeInfo.message"></p>
+                    <a [routerLink]="['/store']" class="btn btn-primary btn-lg" [innerHtml]="storeInfo.linkMessage"></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-xs-center col-sm-6 col-md-5 col-lg-4">
+        <div class="twitter_wrapper pad-top-20">
+            <a class="twitter-timeline" href="https://twitter.com/Warcherandson" data-widget-id="642226917932945408">Tweets by Warcherandson</a>
+            <app-script-hack async src="https://platform.twitter.com/widgets.js" charset="utf-8"></app-script-hack>
+        </div>
+    </div>
+</div>
